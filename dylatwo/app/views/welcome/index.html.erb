@@ -1,5 +1,6 @@
 <h1>Welcome to Dyla 2</h1>
 <h3>Zombies run amok and you are stranded in the city, do what you must to survive.</h3>
+<button id="test">TEST BUTTON</button>
 
 <%= @events.to_json %>
 <%= @locations.to_json %>
@@ -9,3 +10,15 @@
 <div id="eventinfo" dataevents="<%= @events.to_json %>"></div>
 <div id="locationinfo" datalocations="<%= @locations.to_json %>"></div>
 <div id="itemsinfo" dataitems="<%= @items.to_json %>"></div>
+
+<div id="statsbar">
+Stats go here.
+</div>
+
+<div id="explorecity">
+City locations available go here.
+</div>
+
+<div id="mycamp">
+Your home base is here.
+</div>
