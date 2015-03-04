@@ -7,17 +7,17 @@ events = [
 ]
 # location definitions
 locations = [
-  {name:,district:,fastmin:, fastmax:, medmin:, medmax:, slowmin:, slowmax:, flavortext:,imgtag:},
-  {name:,district:,fastmin:, fastmax:, medmin:, medmax:, slowmin:, slowmax:, flavortext:,imgtag:},
-  {name:,district:,fastmin:, fastmax:, medmin:, medmax:, slowmin:, slowmax:, flavortext:,imgtag:},
-  {name:,district:,fastmin:, fastmax:, medmin:, medmax:, slowmin:, slowmax:, flavortext:,imgtag:}
+  {name: 'Gas Station', district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'gas is long gone, might be a screwdriver somewhere',imgtag:'none'},
+  {name: 'Candle Shop',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Quiet, but is there anything in here?',imgtag:'none'},
+  {name:'Seafood Restaurant',district:'Wharf',fastmin:1, fastmax:2, medmin:2, medmax:4, slowmin:3, slowmax:6, flavortext:'big place, lots of zombies...',imgtag:'none'},
+  {name:'Bakery',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:3, slowmin:2, slowmax:4, flavortext:'the smell of baked bread used to linger here',imgtag:'none'}
 ]
 # item definitions
 items = [
-  {name:,spawnarea:,effect:,flavortext:,imgtag:},
-  {name:,spawnarea:,effect:,flavortext:,imgtag:},
-  {name:,spawnarea:,effect:,flavortext:,imgtag:},
-  {name:,spawnarea:,effect:,flavortext:,imgtag:}
+  {name:'Hammer',spawnarea:'All',effect:'Tools: +1',flavortext:'About time one of these showed up',imgtag:'none'},
+  {name:'Screwdriver Set',spawnarea:'All',effect:'Tools: +1',flavortext:'A well worn set of tools but perfectly functional',imgtag:'none'},
+  {name:'Crowbar',spawnarea:'Suburbs',effect:'Attack: +1',flavortext:'Not as much reach as you would like.',imgtag:'none'},
+  {name:'Board Games',spawnarea:'Downtown',effect:'Morale: +1',flavortext:"The toy store won't need it anymore",imgtag:'none'}
 ]
 # get all-------------
 events.each do |ev|
@@ -38,11 +38,12 @@ locations.each do |loc|
     medmax: loc[:medmax],
     slowmin: loc[:slowmin],
     slowmax: loc[:slowmax],
+    flavortext: loc[:flavortext],
     imgtag: loc[:imgtag])
 end
 
 items.each do |item|
-  Event.create(
+  Item.create(
     name: item[:name],
     spawnarea: item[:spawnarea],
     effect: item[:effect],

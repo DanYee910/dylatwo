@@ -1,1 +1,11 @@
-<h1>Testing, Hi!</h1>
+<h1>Welcome to Dyla 2</h1>
+<h3>Zombies run amok and you are stranded in the city, do what you must to survive.</h3>
+
+<%= @events.to_json %>
+<%= @locations.to_json %>
+<%= @items.to_json %>
+
+<!-- Game info -->
+<div id="eventinfo" dataevents="<%= @events.to_json %>"></div>
+<div id="locationinfo" datalocations="<%= @locations.to_json %>"></div>
+<div id="itemsinfo" dataitems="<%= @items.to_json %>"></div>
