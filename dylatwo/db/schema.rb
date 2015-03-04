@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304020652) do
+ActiveRecord::Schema.define(version: 20150304042711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20150304020652) do
     t.integer  "slowmax"
     t.text     "flavortext"
     t.text     "imgtag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "start"
+    t.integer  "tools"
+    t.text     "materials"
+    t.text     "effect"
+    t.text     "flavortext"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
