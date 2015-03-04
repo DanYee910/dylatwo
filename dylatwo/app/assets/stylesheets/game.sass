@@ -3,27 +3,46 @@ $locations: blue
 $mycamp: red
 
 #statsbar
+  padding: 20px
   background-color: $statsbar
   width: 200px
   height: 400px
   display: inline-block
+  vertical-align: bottom
   #gametitle
-    width: 150px
-    height: 150px
+    width: 200px
+    height: 160px
     background-color: yellow
+  #currentevent
+    width: 200px
+    height: 80px
+    background-color: blue
 
 #explorecity
   background-color: $locations
   padding: 20px
   display: inline-block
+  vertical-align: bottom
   height: 400px
   width: 1000px
   .district
+    padding: 10px
     width: 250px
     height: 250px
     display: inline-block
     .explorebutton
       color: red
+    .locationimg
+      width: 100px
+      height: 100px
+      display: inline-block
+      vertical-align: bottom
+    .locationstats
+      width: 140px
+      height: 100px
+      background-color: white
+      display: inline-block
+      vertical-align: bottom
   #suburbs
     background-color: red
   #downtown
@@ -34,6 +53,31 @@ $mycamp: red
     color: blue
 
 #mycamp
+  padding: 20px
+  margin-top: 5px
   background-color: $mycamp
   height: 400px
   width: 1200px
+  .hometab
+    width: 200px
+    height: 30px
+    background-color: #333333
+    display: inline-block
+  .camppanel
+    padding: 20px
+    margin-bottom: 5px
+    height: 250px
+    width: 1000px
+    background-color: #333333
+    #recipelist
+      width: 400px
+      height: 200px
+      background-color: white
+      display: inline-block
+      vertical-align: bottom
+    #currentrecipe
+      width: 400px
+      height: 200px
+      background-color: yellow
+      display: inline-block
+      vertical-align: bottom
