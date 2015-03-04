@@ -20,7 +20,7 @@ function zeroGameState(){
   food = 4;
   morale = 4;
   shelter = 4;
-  tools = 0;
+  tools = 1;
   common_mats = 2;
   uncommon_mats = 0;
   rare_mats = 0;

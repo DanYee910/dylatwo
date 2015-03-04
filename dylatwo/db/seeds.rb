@@ -19,6 +19,14 @@ items = [
   {name:'Crowbar',spawnarea:'Suburbs',effect:'Attack: +1',flavortext:'Not as much reach as you would like.',imgtag:'none'},
   {name:'Board Games',spawnarea:'Downtown',effect:'Morale: +1',flavortext:"The toy store won't need it anymore",imgtag:'none'}
 ]
+
+# recipes definitions
+recipes = [
+  {name:'Bicycle', start:'false',tools:2, materials:'Common Material: -2, Uncommon Material: -1', effect: 'Actions: +1', flavortext:'Quiet and efficient transportation, no gas required.'},
+  {name:'Electric Generator', start:'false',tools:4, materials:'Uncommon Material: -3, Rare Material: -3', effect: 'Shelter: +2, Tools: +1', flavortext:'In good condition, can never get enough electricity.'},
+  {name:'Bat with nails', start:'true',tools:1, materials:'common material: -2', effect: 'Attack: +1', flavortext:'Crude weapon, but gets the job done.'},
+  {name:'Walls', start:'true',tools:2, materials:'common material: -4', effect: 'shelter: +1', flavortext:'Tents only last so long.'},
+]
 # get all-------------
 events.each do |ev|
   Event.create(
@@ -49,4 +57,14 @@ items.each do |item|
     effect: item[:effect],
     flavortext: item[:flavortext],
     imgtag: item[:imgtag])
+end
+
+recipes.each do |recipe|
+  Recipe.create(
+    name: recipe[:name],
+    start: recipe[:start],
+    tools: recipe[:tools],
+    materials: recipe[:materials],
+    effect: recipe[:effect],
+    flavortext: recipe[:flavortext])
 end

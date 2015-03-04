@@ -3,5 +3,6 @@ class WelcomeController < ApplicationController
     @events = Event.all
     @locations = Location.all
     @items = Item.all
+    @recipes = Recipe.all
   end
 end
