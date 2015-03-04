@@ -1,6 +1,11 @@
 //game stats
 var turns;
 
+//locations
+var suburbs = [];
+var downtown = [];
+var wharf = [];
+
 //player stats
 var food;
 var morale;
