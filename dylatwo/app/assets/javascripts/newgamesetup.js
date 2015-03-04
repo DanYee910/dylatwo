@@ -1,10 +1,11 @@
 $(document).ready(function() {
-  zeroGameState();
+  initGameState();
 
 // JS load game assets from database
   var eventslist = $.parseJSON($('#eventinfo').attr('dataevents'))
   var locationslist = $.parseJSON($('#locationinfo').attr('datalocations'))
   var itemslist = $.parseJSON($('#itemsinfo').attr('dataitems'))
+  var recipeslist = $.parseJSON($('#recipesinfo').attr('datarecipes'))
 
 //testing
   $('#test').on('click', function(){
@@ -29,4 +30,11 @@ $(document).ready(function() {
     }
   }
 
+  //find and add starting recipes to players available recipes
+  for(var idx = 0; idx < recipeslist.length; idx++){
+    var startType = recipeslist[idx].starting;
+    if(startType === "true"){
+        player["recipes"].push(recipeslist[idx]);
+    }
+  }
 });
