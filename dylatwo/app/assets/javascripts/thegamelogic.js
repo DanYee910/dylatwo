@@ -1,4 +1,21 @@
 $(document).ready(function() {
+  //modifications that last this turn only
+  var untilEndofTurn = {
+    modAttack: 0,
+    modActions: 0,
+    modReckless: 0,
+    modThorough: 0,
+    modZombieStrength: 0
+  }
+
+  //remove EoT effects
+  function clearEndofTurn(){
+    untilEndofTurn.modAttack = 0;
+    untilEndofTurn.modActions = 0;
+    untilEndofTurn.modReckless = 0;
+    untilEndofTurn.modThorough = 0;
+    untilEndofTurn.modZombies = 0;
+  }
 
   //random function
   function getRandomInt(min, max) {
@@ -53,7 +70,7 @@ $(document).ready(function() {
 
     $('#currentevent .eventname').html('Event: ' + event.name);
     $('#currentevent .eventtxt').html(event.flavortext);
-    $('#currentevent .eventeffect').html(event.effect);
+    $('#currentevent .eventeffect').html('End of Turn => '+event.effect);
   }
   //******* BEGIN GAME *********
   //initialize game stats and stat views
