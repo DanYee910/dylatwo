@@ -55,7 +55,7 @@ $(document).ready(function() {
     $('#currentevent .eventtxt').html(event.flavortext);
     $('#currentevent .eventeffect').html(event.effect);
   }
-
+  //******* BEGIN GAME *********
   //initialize game stats and stat views
   initGameState();
   updatePlayerStatsView();
