@@ -2,9 +2,9 @@
 var turns;
 
 //locations decks
-var suburbs = [];
-var downtown = [];
-var wharf = [];
+var allsuburbs = [];
+var alldowntown = [];
+var allwharf = [];
 
 //player stats
 var player = {

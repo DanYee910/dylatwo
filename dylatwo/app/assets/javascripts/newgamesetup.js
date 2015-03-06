@@ -19,13 +19,13 @@ $(document).ready(function() {
   for(var idx = 0; idx < locationslist.length; idx++){
     var templocation = locationslist[idx].district;
     if(templocation === "Suburbs"){
-      suburbs.push(locationslist[idx]);
+      allsuburbs.push(locationslist[idx]);
     }
     else if(templocation === "Downtown"){
-      downtown.push(locationslist[idx]);
+      alldowntown.push(locationslist[idx]);
     }
     else {
-      wharf.push(locationslist[idx]);
+      allwharf.push(locationslist[idx]);
     }
   }
 
