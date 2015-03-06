@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
 // JS load game assets from database
-  var eventslist = $.parseJSON($('#eventinfo').attr('dataevents'))
-  var locationslist = $.parseJSON($('#locationinfo').attr('datalocations'))
-  var itemslist = $.parseJSON($('#itemsinfo').attr('dataitems'))
-  var recipeslist = $.parseJSON($('#recipesinfo').attr('datarecipes'))
+  eventslist = $.parseJSON($('#eventinfo').attr('dataevents'))
+  locationslist = $.parseJSON($('#locationinfo').attr('datalocations'))
+  itemslist = $.parseJSON($('#itemsinfo').attr('dataitems'))
+  recipeslist = $.parseJSON($('#recipesinfo').attr('datarecipes'))
 
 //testing
   $('#test').on('click', function(){

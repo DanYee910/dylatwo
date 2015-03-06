@@ -1,10 +1,16 @@
-$statsbar: #666666
-$locations: blue
+
 $mycamp: red
+$verydark: #1A1A1A
+$dark: #333333
+$meddark: #4C4C4C
+$med: #666666
+$medlight: #808080
+$light: #999999
+$verylight: #CCCCCC
 
 #statsbar
   padding: 20px
-  background-color: $statsbar
+  background-color: $med
   width: 200px
   height: 400px
   display: inline-block
@@ -12,16 +18,12 @@ $mycamp: red
   #gametitle
     width: 200px
     height: 160px
-    background-color: yellow
-  #currentevent
-    width: 200px
-    height: 80px
-    background-color: blue
+    background-color: $verylight
   .sidebarstat
     color: yellow
 
 #explorecity
-  background-color: $locations
+  background-color: $meddark
   padding: 20px
   display: inline-block
   vertical-align: bottom
@@ -29,20 +31,20 @@ $mycamp: red
   width: 1000px
   .district
     padding: 10px
-    width: 250px
+    width: 300px
     height: 250px
     display: inline-block
     vertical-align: bottom
     .explorebutton
-      color: red
+      color: $verydark
     .locationimg
-      width: 100px
-      height: 100px
+      width: 125px
+      height: 125px
       display: inline-block
       vertical-align: bottom
     .locationstats
-      width: 140px
-      height: 100px
+      width: 160px
+      height: 125px
       background-color: white
       display: inline-block
       vertical-align: bottom
@@ -55,6 +57,10 @@ $mycamp: red
       .full
         background-color: red
     .flavtxt
+      margin: 5px auto 5px auto
+      height: 50px
+      width: 220px
+      background-color: $verylight
       font-style: italic
   #suburbs
     background-color: red
@@ -62,13 +68,36 @@ $mycamp: red
     background-color: green
   #wharf
     background-color: #666666
+  #currentevent
+    text-align: center
+    width: 300px
+    height: 100px
+    background-color: $light
+    display: inline-block
+    vertical-align: bottom
+    .eventname
+      font-size: 20px
+    .eventtxt
+      font-style: italic
+    .eventeffect
+      font-size: 20px
+  #explorerstats
+    background-color: $medlight
+    display: inline-block
+    vertical-align: bottom
   .partystat
     color: white
+  .gamelog
+    width: 400px
+    height: 100px
+    background-color: white
+    display: inline-block
+    vertical-align: bottom
 
 #mycamp
   padding: 20px
   margin-top: 5px
-  background-color: $mycamp
+  background-color: $meddark
   height: 400px
   width: 1200px
   .hometab

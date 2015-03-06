@@ -24,7 +24,6 @@ $(document).ready(function() {
   }
 
   //show a new location
-  // for a district, pick a random obj from the array of the same name as district, set values
   function showNewLocation(district, alldistrict){
     //get a random location
     var min = 0
@@ -44,6 +43,19 @@ $(document).ready(function() {
     $('#'+district+' .flavtxt').html(locObj.flavortext);
   }
 
+  //show a new Event
+  function newEvent(){
+    //get random event
+    var min = 0
+    var max = eventslist.length - 1
+    var idx = getRandomInt(min, max)
+    var event = eventslist[idx]
+
+    $('#currentevent .eventname').html('Event: ' + event.name);
+    $('#currentevent .eventtxt').html(event.flavortext);
+    $('#currentevent .eventeffect').html(event.effect);
+  }
+
   //initialize game stats and stat views
   initGameState();
   updatePlayerStatsView();
@@ -52,4 +64,6 @@ $(document).ready(function() {
   showNewLocation("suburbs", allsuburbs);
   showNewLocation("downtown", alldowntown);
   showNewLocation("wharf", allwharf);
+  //get an event
+  newEvent();
 })

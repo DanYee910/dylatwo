@@ -1,6 +1,12 @@
 //game stats
 var turns;
 
+//declare data variables
+var eventslist;
+var locationslist;
+var itemslist;
+var recipeslist;
+
 //locations decks
 var allsuburbs = [];
 var alldowntown = [];
