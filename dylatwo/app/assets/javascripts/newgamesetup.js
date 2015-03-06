@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  initGameState();
 
 // JS load game assets from database
   var eventslist = $.parseJSON($('#eventinfo').attr('dataevents'))
