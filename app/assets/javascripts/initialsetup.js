@@ -12,6 +12,12 @@ var allsuburbs = [];
 var alldowntown = [];
 var allwharf = [];
 
+//item decks
+var suburbItems = [];
+var downtownItems = [];
+var wharfItems = [];
+var universalItems = [];
+
 //player stats
 var player = {
   backpack: [],

@@ -28,7 +28,22 @@ $(document).ready(function() {
       allwharf.push(locationslist[idx]);
     }
   }
-
+  //separate items by location
+  for(var idx = 0; idx < itemslist.length; idx++){
+    var tempspawn = itemslist[idx].spawnarea;
+    if(tempspawn === "Suburbs"){
+      suburbItems.push(itemslist[idx])
+    }
+    else if(tempspawn === "Downtown"){
+      downtownItems.push(itemslist[idx])
+    }
+    else if(tempspawn === "Wharf"){
+      wharfItems.push(itemslist[idx])
+    }
+    else{
+      universalItems.push(itemslist[idx])
+    }
+  }
   //find and add starting recipes to players available recipes
   for(var idx = 0; idx < recipeslist.length; idx++){
     var startType = recipeslist[idx].starting;

@@ -164,7 +164,6 @@ $(document).ready(function() {
   function findItems(district, num){
     //for either of 3 district
     //for each difficulty, quick, cautious, full
-    //0-2, 0-4,0-6
     for(var items = 0, items < num, items++){
 
     }
