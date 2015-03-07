@@ -6,15 +6,6 @@ $(document).ready(function() {
   itemslist = $.parseJSON($('#itemsinfo').attr('dataitems'))
   recipeslist = $.parseJSON($('#recipesinfo').attr('datarecipes'))
 
-//testing
-  $('#test').on('click', function(){
-    console.log(food);
-  });
-
-// for(key in eventslist) {
-//     console.log(key, eventslist[key]);
-// }
-
   // separate locations by district
   for(var idx = 0; idx < locationslist.length; idx++){
     var templocation = locationslist[idx].district;

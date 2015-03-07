@@ -110,6 +110,7 @@ $(document).ready(function() {
 
   //explore
   function exploreHere(){
+    printLog("here is a test");
     //consume 1 action
     player["actionsLeft"] -= 1
     updatePartyStatsView();
@@ -244,6 +245,11 @@ $(document).ready(function() {
       showNewLocation("wharf", allwharf);
     }
     console.log('found new location');
+  }
+
+  //print message to game log
+  function printLog(string){
+    $('#gameMsg').html(string).fadeIn(500).delay(2000).fadeOut(1000);
   }
 
   //******* BEGIN GAME *********
