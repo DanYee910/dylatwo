@@ -28,6 +28,11 @@ var player = {
   thorough: 0//more items found
 }
 
+//game variables
+var currentDowntown;
+var currentSuburbs;
+var currentWharf;
+
 function initGameState(){
   turns = 0;
   player["food"] = 4;

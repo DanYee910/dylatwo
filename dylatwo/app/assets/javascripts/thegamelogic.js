@@ -48,6 +48,17 @@ $(document).ready(function() {
     var idx = getRandomInt(min, max)
     var locObj = alldistrict[idx]
 
+    //store as current loc variable
+    if(district === "suburbs"){
+      currentSuburbs = locObj;
+    }
+    else if(district === "downtown"){
+      currentDowntown = locObj;
+    }
+    else{
+      currentWharf = locObj;
+    }
+
     //update correct view with this location
     // $('#'+district+' .locationimg').attr('src', locObj.imgtag);
     $('#'+district+' .locname').html(locObj.name);
