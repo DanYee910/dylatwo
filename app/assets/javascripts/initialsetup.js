@@ -1,5 +1,6 @@
 //game stats
 var turns;
+var maxMessages = 50;
 
 //declare data variables
 var eventslist;

@@ -110,7 +110,6 @@ $(document).ready(function() {
 
   //explore
   function exploreHere(){
-    printLog("here is a test");
     //consume 1 action
     player["actionsLeft"] -= 1
     updatePartyStatsView();
@@ -131,6 +130,7 @@ $(document).ready(function() {
       currentDistrict = "wharf";
       currentLocation = currentWharf;
     }
+    printLog('Searching '+currentLocation.name);
 
     //find fight values here
     var zmin;
@@ -164,13 +164,12 @@ $(document).ready(function() {
     //combat
     if(finalAtk >= finalZ){
       //success, add items to backpack
-      console.log('you win!');
-      console.log('found '+num+' items');
+      printLog('Zombies defeated, found '+num+' items!');
       findItems(currentDistrict, num);
     }
     else{
       //fail, get nothing
-      console.log('FAIL! You get JACK SHIT.');
+      printLog('Too many zombies, you run for your life emptyhanded.');
     }
   }
 
@@ -200,30 +199,30 @@ $(document).ready(function() {
       //get recipes
       if(cat === 0){
         var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
-        console.log('you found recipe '+r.name);
+        printLog('you found recipe: '+r.name);
         player['backpack'].push(r);
       }
       //get universal items
       else if(cat === 1 || cat === 2){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
-        console.log('you found universal '+i.name);
+        printLog('you found: '+i.name);
         player['backpack'].push(i);
       }
       //get district items
       else if(cat === 3 || cat === 4){
         var i = here[getRandomInt(0,here.length - 1)];
-        console.log('you found district '+i.name);
+        printLog('you found: '+i.name);
         player['backpack'].push(i);
       }
       //get other 2 district items
       else if(cat === 5) {
         var i = there1[getRandomInt(0,there1.length - 1)];
-        console.log('you found other1 '+i.name);
+        printLog('you found: '+i.name);
         player['backpack'].push(i);
       }
       else if(cat === 6){
         var i = there2[getRandomInt(0,there2.length - 1)];
-        console.log('you found other2 '+i.name);
+        printLog('you found: '+i.name);
         player['backpack'].push(i);
       }
     }
@@ -238,18 +237,24 @@ $(document).ready(function() {
     var firstThreeId = $(this).attr('id').substr(0,3);
     if(firstThreeId === "sub"){
       showNewLocation("suburbs", allsuburbs);
+      printLog('found a new place in the suburbs');
     }
     else if(firstThreeId === "dow"){
       showNewLocation("downtown", alldowntown);
+      printLog('found a new place downtown');
     } else {
       showNewLocation("wharf", allwharf);
+      printLog('found a new place at the wharf');
     }
-    console.log('found new location');
   }
 
   //print message to game log
   function printLog(string){
-    $('#gameMsg').html(string).fadeIn(500).delay(2000).fadeOut(1000);
+    if($('.gamelog tr').length === maxMessages){
+      $('.gamelog tr:nth-child(1)').remove();
+    }
+    $('#gameMsg').append('<tr><td>'+string+'</td></tr>');
+    $('.gamelog').scrollTop($('.gamelog')[0].scrollHeight);
   }
 
   //******* BEGIN GAME *********
