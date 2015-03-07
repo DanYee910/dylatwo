@@ -181,6 +181,9 @@ $(document).ready(function() {
       there1 = suburbItems;
       there2 = downtownItems;
     }
+    console.log(here.length - 1);
+    console.log(there1.length - 1);
+    console.log(there2.length - 1);
     //chances = 2 for own district, 2 for universal, 1 each for other district or recipe
     for(var items = 0; items < num; items++){
       //get random item category
@@ -188,30 +191,30 @@ $(document).ready(function() {
       //get recipes
       if(cat === 0){
         var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
-        console.log('you found '+r.name);
+        console.log('you found recipe '+r.name);
         player['backpack'].push(r);
       }
       //get universal items
       else if(cat === 1 || cat === 2){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
-        console.log('you found '+i.name);
+        console.log('you found universal '+i.name);
         player['backpack'].push(i);
       }
       //get district items
       else if(cat === 3 || cat === 4){
         var i = here[getRandomInt(0,here.length - 1)];
-        console.log('you found '+i.name);
+        console.log('you found district '+i.name);
         player['backpack'].push(i);
       }
       //get other 2 district items
       else if(cat === 5) {
         var i = there1[getRandomInt(0,there1.length - 1)];
-        console.log('you found '+i.name);
+        console.log('you found other1 '+i.name);
         player['backpack'].push(i);
       }
       else if(cat === 6){
         var i = there2[getRandomInt(0,there2.length - 1)];
-        console.log('you found '+i.name);
+        console.log('you found other2 '+i.name);
         player['backpack'].push(i);
       }
     }
