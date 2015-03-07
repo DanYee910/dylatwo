@@ -123,7 +123,7 @@ $(document).ready(function() {
     //find fight values here
     var zmin;
     var zmax;
-    var numRewards;
+    var numRewards;//up to 2 for quick, 4 for cautious, 6 full
     if(currentExploreDiff === 'quick'){
       zmin = currentLocation.fastmin;
       zmax = currentLocation.fastmax;
@@ -144,9 +144,9 @@ $(document).ready(function() {
 
   //combat
   function fightZombies(min, max, num){
-    //player attack and temp mods
+    //add player attack and temp mods
     var finalAtk = player.attack + untilEndofTurn.modAttack;
-    //zombie roll plus mods
+    //add random zombie roll plus mods
     z = getRandomInt(min, max);
     var finalZ = z + untilEndofTurn.modZombieStrength;
     //combat
@@ -158,29 +158,64 @@ $(document).ready(function() {
     }
     else{
       //fail, get nothing
-      console.log('FAIL!');
+      console.log('FAIL! You get JACK SHIT.');
     }
   }
 
   function findItems(district, num){
+    //set up district decks
+    var here;
+    var there1;
+    var there2;
+    if(district === "suburbs"){
+      here = suburbItems;
+      there1 = downtownItems;
+      there2 = wharfItems;
+    }
+    else if(district === "downtown"){
+      here = downtownItems;
+      there1 = suburbItems;
+      there2 = wharfItems;
+    } else {
+      here = wharfItems;
+      there1 = suburbItems;
+      there2 = downtownItems;
+    }
     //chances = 2 for own district, 2 for universal, 1 each for other district or recipe
     for(var items = 0; items < num; items++){
       //get random item category
-      var idx = 2//getRandomInt(0,6);
+      var cat = getRandomInt(0,6);
       //get recipes
-      if(idx === 0){
+      if(cat === 0){
         var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
         console.log('you found '+r.name);
         player['backpack'].push(r);
       }
       //get universal items
-      else if(idx > 0 && idx < 3){
+      else if(cat === 1 || cat === 2){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
         console.log('you found '+i.name);
         player['backpack'].push(i);
       }
-      console.log(player['backpack']);
+      //get district items
+      else if(cat === 3 || cat === 4){
+        var i = here[getRandomInt(0,here.length - 1)];
+        console.log('you found '+i.name);
+        player['backpack'].push(i);
+      }
+      //get other 2 district items
+      else if(cat === 5) {
+        var i = there1[getRandomInt(0,there1.length - 1)];
+        console.log('you found '+i.name);
+        player['backpack'].push(i);
+      }
+      else if(cat === 6){
+        var i = there2[getRandomInt(0,there2.length - 1)];
+        console.log('you found '+i.name);
+        player['backpack'].push(i);
+      }
     }
+    console.log(player['backpack']);
   }
 
   //******* BEGIN GAME *********
