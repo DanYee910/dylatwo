@@ -44,11 +44,13 @@ $(document).ready(function() {
       universalItems.push(itemslist[idx])
     }
   }
-  //find and add starting recipes to players available recipes
+  //add starting recipes to players available recipes, others to game
   for(var idx = 0; idx < recipeslist.length; idx++){
     var startType = recipeslist[idx].starting;
     if(startType === "true"){
         player["recipes"].push(recipeslist[idx]);
+    } else {
+      gameRecipes.push(recipeslist[idx]);
     }
   }
 });

@@ -153,6 +153,7 @@ $(document).ready(function() {
     if(finalAtk >= finalZ){
       //success, add items to backpack
       console.log('you win!');
+      console.log('found '+num+' items');
       findItems(currentDistrict, num);
     }
     else{
@@ -162,10 +163,23 @@ $(document).ready(function() {
   }
 
   function findItems(district, num){
-    //for either of 3 district
-    //for each difficulty, quick, cautious, full
-    for(var items = 0, items < num, items++){
-
+    //chances = 2 for own district, 2 for universal, 1 each for other district or recipe
+    for(var items = 0; items < num; items++){
+      //get random item category
+      var idx = 2//getRandomInt(0,6);
+      //get recipes
+      if(idx === 0){
+        var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
+        console.log('you found '+r.name);
+        player['backpack'].push(r);
+      }
+      //get universal items
+      else if(idx > 0 && idx < 3){
+        var i = universalItems[getRandomInt(0,universalItems.length - 1)];
+        console.log('you found '+i.name);
+        player['backpack'].push(i);
+      }
+      console.log(player['backpack']);
     }
   }
 

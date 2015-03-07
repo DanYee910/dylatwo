@@ -17,10 +17,11 @@ var suburbItems = [];
 var downtownItems = [];
 var wharfItems = [];
 var universalItems = [];
+var gameRecipes = [];
 
 //player stats
 var player = {
-  backpack: [],
+  backpack: [],//temp storage from exploring
   food: 0,
   morale: 0,
   shelter: 0,
