@@ -130,7 +130,7 @@ $(document).ready(function() {
       currentDistrict = "wharf";
       currentLocation = currentWharf;
     }
-    printLog('Searching '+currentLocation.name);
+    printLog('Searching '+currentLocation.name+'...');
 
     //find fight values here
     var zmin;
@@ -151,7 +151,7 @@ $(document).ready(function() {
       numRewards = getRandomInt(0,6);
     }
 
-    fightZombies(zmin, zmax, numRewards);
+    setTimeout(function(){fightZombies(zmin, zmax, numRewards)}, 1500);
   }
 
   //combat
@@ -165,7 +165,7 @@ $(document).ready(function() {
     if(finalAtk >= finalZ){
       //success, add items to backpack
       printLog('Zombies defeated, found '+num+' items!');
-      findItems(currentDistrict, num);
+      setTimeout(function(){findItems(currentDistrict, num)}, 1000);
     }
     else{
       //fail, get nothing
@@ -237,14 +237,14 @@ $(document).ready(function() {
     var firstThreeId = $(this).attr('id').substr(0,3);
     if(firstThreeId === "sub"){
       showNewLocation("suburbs", allsuburbs);
-      printLog('found a new place in the suburbs');
+      printLog('Found a new place in the suburbs.');
     }
     else if(firstThreeId === "dow"){
       showNewLocation("downtown", alldowntown);
-      printLog('found a new place downtown');
+      printLog('Found a new place downtown');
     } else {
       showNewLocation("wharf", allwharf);
-      printLog('found a new place at the wharf');
+      printLog('Found a new place at the wharf');
     }
   }
 
