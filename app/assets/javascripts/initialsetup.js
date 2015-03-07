@@ -32,6 +32,7 @@ var player = {
   recipes: [],
   attack: 0,
   actions: 0,
+  actionsLeft: 0,
   reckless: 0,//more zombies encountered
   thorough: 0//more items found
 }
@@ -55,6 +56,7 @@ function initGameState(){
   player["rare_mats"] = 0;
   player["attack"] = 1;
   player["actions"] = 3;
+  player["actionsLeft"] = player["actions"];
   player["reckless"] = 0;
   player["thorough"] = 0;
 }

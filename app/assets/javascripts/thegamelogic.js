@@ -51,7 +51,7 @@ $(document).ready(function() {
   //update away party stats
   function updatePartyStatsView(){
     $('#partyattack').html(player.attack);
-    $('#partyactions').html(player.actions);
+    $('#partyactions').html(player.actionsLeft);
     $('#partyreckless').html(player.reckless);
     $('#partythorough').html(player.thorough);
   }
@@ -102,6 +102,9 @@ $(document).ready(function() {
 
   //explore
   function exploreHere(){
+    //consume 1 action
+    player["actionsLeft"] -= 1
+    updatePartyStatsView();
     //find current explore diff, quick, cautious, or full
     currentExploreDiff = $(this).parent().parent().attr('class');
 
