@@ -9,6 +9,9 @@ $(document).ready(function() {
   addExploreHandler('whaq');
   addExploreHandler('whac');
   addExploreHandler('whaf');
+  findNewLocHandler('sube');
+  findNewLocHandler('dowe');
+  findNewLocHandler('whae');
 
   //modifications that last this turn only
   var untilEndofTurn = {
@@ -26,11 +29,16 @@ $(document).ready(function() {
     untilEndofTurn.modReckless = 0;
     untilEndofTurn.modThorough = 0;
     untilEndofTurn.modZombieStrength = 0;
+    player.actionsLeft = player.actions;
   }
 
   //function to add explore handlers
   function addExploreHandler(id){
     $('#'+id+'').on('click', exploreHere);
+  }
+  //function to add new location handlers
+  function findNewLocHandler(id){
+    $('#'+id+'').on('click', findNewLoc);
   }
 
   //random int function
@@ -184,9 +192,6 @@ $(document).ready(function() {
       there1 = suburbItems;
       there2 = downtownItems;
     }
-    console.log(here.length - 1);
-    console.log(there1.length - 1);
-    console.log(there2.length - 1);
     //chances = 2 for own district, 2 for universal, 1 each for other district or recipe
     for(var items = 0; items < num; items++){
       //get random item category
@@ -222,6 +227,23 @@ $(document).ready(function() {
       }
     }
     console.log(player['backpack']);
+  }
+
+  function findNewLoc(){
+    //consume 1 action
+    player["actionsLeft"] -= 1
+    updatePartyStatsView();
+    //get new location
+    var firstThreeId = $(this).attr('id').substr(0,3);
+    if(firstThreeId === "sub"){
+      showNewLocation("suburbs", allsuburbs);
+    }
+    else if(firstThreeId === "dow"){
+      showNewLocation("downtown", alldowntown);
+    } else {
+      showNewLocation("wharf", allwharf);
+    }
+    console.log('found new location');
   }
 
   //******* BEGIN GAME *********

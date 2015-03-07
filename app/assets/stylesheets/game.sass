@@ -7,7 +7,15 @@ $med: #666666
 $medlight: #808080
 $light: #999999
 $verylight: #CCCCCC
+$zred: #FF9999
+$zgreen: #99E699
+$zyellow: #FFFF99
 
+html
+  body
+    background-color: $light
+    font-size: 16px
+    font-family: "Times New Roman", Times, serif
 #statsbar
   padding: 20px
   background-color: $med
@@ -51,16 +59,17 @@ $verylight: #CCCCCC
       width: 160px
       height: 125px
       background-color: white
+      color: black
       display: inline-block
       vertical-align: bottom
       .locname
         color: blue
       .quick
-        background-color: green
+        background-color: $zgreen
       .cautious
-        background-color: yellow
+        background-color: $zyellow
       .full
-        background-color: red
+        background-color: $zred
     .flavtxt
       color: black
       margin: 5px auto 5px auto
