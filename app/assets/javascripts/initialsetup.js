@@ -14,6 +14,7 @@ var allwharf = [];
 
 //player stats
 var player = {
+  backpack: [],
   food: 0,
   morale: 0,
   shelter: 0,
@@ -32,6 +33,9 @@ var player = {
 var currentDowntown;
 var currentSuburbs;
 var currentWharf;
+var currentExploreDiff;
+var currentDistrict;
+var currentLocation;
 
 function initGameState(){
   turns = 0;
