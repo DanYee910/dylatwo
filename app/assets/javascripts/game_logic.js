@@ -1,17 +1,17 @@
 $(document).ready(function() {
   //add explore handlers
-  addExploreHandler('subq');
-  addExploreHandler('subc');
-  addExploreHandler('subf');
-  addExploreHandler('dowq');
-  addExploreHandler('dowc');
-  addExploreHandler('dowf');
-  addExploreHandler('whaq');
-  addExploreHandler('whac');
-  addExploreHandler('whaf');
-  findNewLocHandler('sube');
-  findNewLocHandler('dowe');
-  findNewLocHandler('whae');
+  addHandler('subq', exploreHere);
+  addHandler('subc', exploreHere);
+  addHandler('subf', exploreHere);
+  addHandler('dowq', exploreHere);
+  addHandler('dowc', exploreHere);
+  addHandler('dowf', exploreHere);
+  addHandler('whaq', exploreHere);
+  addHandler('whac', exploreHere);
+  addHandler('whaf', exploreHere);
+  addHandler('sube', findNewLoc);
+  addHandler('dowe', findNewLoc);
+  addHandler('whae', findNewLoc);
 
   //remove EoT effects
   function clearEndofTurn(){
@@ -23,13 +23,9 @@ $(document).ready(function() {
     actionsLeft = actions;
   }
 
-  //function to add explore handlers
-  function addExploreHandler(id){
-    $('#'+id+'').on('click', exploreHere);
-  }
-  //function to add new location handlers
-  function findNewLocHandler(id){
-    $('#'+id+'').on('click', findNewLoc);
+  //function to add handlers
+  function addHandler(id, functionReference){
+    $('#'+id+'').on('click', functionReference);
   }
 
   //random int function
@@ -49,10 +45,10 @@ $(document).ready(function() {
   }
   //update away party stats
   function updatePartyStatsView(){
-    $('#partyattack').html(attack);
-    $('#partyactions').html(actionsLeft);
-    $('#partyreckless').html(reckless);
-    $('#partythorough').html(thorough);
+    $('#party-attack').html(attack);
+    $('#party-actions').html(actionsLeft);
+    $('#party-reckless').html(reckless);
+    $('#party-thorough').html(thorough);
   }
 
   //show a new location
@@ -92,11 +88,11 @@ $(document).ready(function() {
     var min = 0
     var max = gameState.allEvents.length - 1
     var idx = getRandomInt(min, max)
-    var event = gameState.allEvents[idx]
+    currentEvent = gameState.allEvents[idx]
 
-    $('#currentevent .eventname').html('Event: ' + event.name);
-    $('#currentevent .eventtxt').html(event.flavortext);
-    $('#currentevent .eventeffect').html('End of Turn => '+event.effect);
+    $('#current-event .event-name').html('Event: ' + currentEvent.name);
+    $('#current-event .event-txt').html(currentEvent.flavortext);
+    $('#current-event .event-effect').html('End of Turn => '+currentEvent.effect);
   }
 
   //explore
@@ -241,11 +237,11 @@ $(document).ready(function() {
 
   //print message to game log
   function printLog(string){
-    if($('.gamelog tr').length === maxMessages){
-      $('.gamelog tr:nth-child(1)').remove();
+    if($('.game-log tr').length === maxMessages){
+      $('.game-log tr:nth-child(1)').remove();
     }
-    $('#gameMsg').append('<tr><td>'+string+'</td></tr>');
-    $('.gamelog').scrollTop($('.gamelog')[0].scrollHeight);
+    $('#game-msg').append('<tr><td>'+string+'</td></tr>');
+    $('.game-log').scrollTop($('.game-log')[0].scrollHeight);
   }
 
   //******* BEGIN GAME *********
@@ -254,9 +250,9 @@ $(document).ready(function() {
   updatePlayerStatsView();
   updatePartyStatsView();
   //deal starting 3 locations
-  showNewLocation("suburbs", allsuburbs);
-  showNewLocation("downtown", alldowntown);
-  showNewLocation("wharf", allwharf);
+  showNewLocation("suburbs", allSuburbs);
+  showNewLocation("downtown", allDowntown);
+  showNewLocation("wharf", allWharf);
   //get an event
   newEvent();
 })

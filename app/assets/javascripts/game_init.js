@@ -11,13 +11,13 @@ $(document).ready(function() {
   for (i = 0; i < gameState.allLocations.length; i++) {
     var templocation = gameState.allLocations[i].district;
     if(templocation === "Suburbs") {
-      allsuburbs.push(gameState.allLocations[i]);
+      allSuburbs.push(gameState.allLocations[i]);
     }
     else if (templocation === "Downtown") {
-      alldowntown.push(gameState.allLocations[i]);
+      allDowntown.push(gameState.allLocations[i]);
     }
     else {
-      allwharf.push(gameState.allLocations[i]);
+      allWharf.push(gameState.allLocations[i]);
     }
   }
   //separate items by location

@@ -1,9 +1,9 @@
 var maxMessages = 50;
 
 //locations decks
-var allsuburbs = [];
-var alldowntown = [];
-var allwharf = [];
+var allSuburbs = [];
+var allDowntown = [];
+var allWharf = [];
 
 //item decks
 var suburbItems = [];
@@ -14,9 +14,9 @@ var gameRecipes = [];
 
 //player stats
 var backpack = [];//temp storage from exploring
-var common_mats = 0;
-var uncommon_mats = 0;
-var rare_mats = 0;
+// var commonMats = 0;
+// var uncommonMats = 0;
+// var rareMats = 0;
 var recipes = [];
 var attack = 0;
 var actions = 0;
@@ -31,6 +31,7 @@ var currentWharf;
 var currentExploreDiff;
 var currentDistrict;
 var currentLocation;
+var currentEvent;
 
 //modifications that last this turn only
 var untilEndofTurn = {
