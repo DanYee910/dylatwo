@@ -39,7 +39,7 @@ $(document).ready(function() {
   for(var idx = 0; idx < recipeslist.length; idx++){
     var startType = recipeslist[idx].starting;
     if(startType === "true"){
-        player["recipes"].push(recipeslist[idx]);
+        recipes.push(recipeslist[idx]);
     } else {
       gameRecipes.push(recipeslist[idx]);
     }

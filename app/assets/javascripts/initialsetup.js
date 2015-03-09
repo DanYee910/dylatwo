@@ -21,22 +21,20 @@ var universalItems = [];
 var gameRecipes = [];
 
 //player stats
-var player = {
-  backpack: [],//temp storage from exploring
-  food: 0,
-  morale: 0,
-  shelter: 0,
-  tools: 0,
-  common_mats: 0,
-  uncommon_mats: 0,
-  rare_mats: 0,
-  recipes: [],
-  attack: 0,
-  actions: 0,
-  actionsLeft: 0,
-  reckless: 0,//more zombies encountered
-  thorough: 0//more items found
-}
+var backpack = [];//temp storage from exploring
+var food = 0;
+var morale = 0;
+var shelter = 0;
+var tools = 0;
+var common_mats = 0;
+var uncommon_mats = 0;
+var rare_mats = 0;
+var recipes = [];
+var attack = 0;
+var actions = 0;
+var actionsLeft = 0;
+var reckless = 0; //more zombies encountered
+var thorough = 0; //more items found
 
 //game variables
 var currentDowntown;
@@ -48,16 +46,25 @@ var currentLocation;
 
 function initGameState(){
   turns = 0;
-  player["food"] = 4;
-  player["morale"] = 4;
-  player["shelter"] = 4;
-  player["tools"] = 1;
-  player["common_mats"] = 2;
-  player["uncommon_mats"] = 0;
-  player["rare_mats"] = 0;
-  player["attack"] = 1;
-  player["actions"] = 3;
-  player["actionsLeft"] = player["actions"];
-  player["reckless"] = 0;
-  player["thorough"] = 0;
+  food = 4;
+  morale = 4;
+  shelter = 4;
+  tools = 1;
+  common_mats = 2;
+  uncommon_mats = 0;
+  rare_mats = 0;
+  attack = 1;
+  actions = 3;
+  actionsLeft = actions;
+  reckless = 0;
+  thorough = 0;
+}
+
+//modifications that last this turn only
+var untilEndofTurn = {
+  modAttack: 0,
+  modActions: 0,
+  modReckless: 0,
+  modThorough: 0,
+  modZombieStrength: 0
 }

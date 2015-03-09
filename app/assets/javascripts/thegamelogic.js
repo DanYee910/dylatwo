@@ -13,15 +13,6 @@ $(document).ready(function() {
   findNewLocHandler('dowe');
   findNewLocHandler('whae');
 
-  //modifications that last this turn only
-  var untilEndofTurn = {
-    modAttack: 0,
-    modActions: 0,
-    modReckless: 0,
-    modThorough: 0,
-    modZombieStrength: 0
-  }
-
   //remove EoT effects
   function clearEndofTurn(){
     untilEndofTurn.modAttack = 0;
@@ -29,7 +20,7 @@ $(document).ready(function() {
     untilEndofTurn.modReckless = 0;
     untilEndofTurn.modThorough = 0;
     untilEndofTurn.modZombieStrength = 0;
-    player.actionsLeft = player.actions;
+    actionsLeft = actions;
   }
 
   //function to add explore handlers
@@ -48,20 +39,20 @@ $(document).ready(function() {
   //update the stats sidebar view with current player values
   function updatePlayerStatsView(){
     $('#sidebarturns').html(turns);
-    $('#sidebarfood').html(player.food);
-    $('#sidebarmorale').html(player.morale);
-    $('#sidebarshelter').html(player.shelter);
-    $('#sidebartools').html(player.tools);
-    $('#sidebarcommon').html(player.common_mats);
-    $('#sidebaruncommon').html(player.uncommon_mats);
-    $('#sidebarrare').html(player.rare_mats);
+    $('#sidebarfood').html(food);
+    $('#sidebarmorale').html(morale);
+    $('#sidebarshelter').html(shelter);
+    $('#sidebartools').html(tools);
+    $('#sidebarcommon').html(common_mats);
+    $('#sidebaruncommon').html(uncommon_mats);
+    $('#sidebarrare').html(rare_mats);
   }
   //update away party stats
   function updatePartyStatsView(){
-    $('#partyattack').html(player.attack);
-    $('#partyactions').html(player.actionsLeft);
-    $('#partyreckless').html(player.reckless);
-    $('#partythorough').html(player.thorough);
+    $('#partyattack').html(attack);
+    $('#partyactions').html(actionsLeft);
+    $('#partyreckless').html(reckless);
+    $('#partythorough').html(thorough);
   }
 
   //show a new location
@@ -111,7 +102,7 @@ $(document).ready(function() {
   //explore
   function exploreHere(){
     //consume 1 action
-    player["actionsLeft"] -= 1
+    actionsLeft -= 1
     updatePartyStatsView();
     //find current explore diff, quick, cautious, or full
     currentExploreDiff = $(this).parent().parent().attr('class');
@@ -157,7 +148,7 @@ $(document).ready(function() {
   //combat
   function fightZombies(min, max, num){
     //add player attack and temp mods
-    var finalAtk = player.attack + untilEndofTurn.modAttack;
+    var finalAtk = attack + untilEndofTurn.modAttack;
     //add random zombie roll plus mods
     z = getRandomInt(min, max);
     var finalZ = z + untilEndofTurn.modZombieStrength;
@@ -200,38 +191,38 @@ $(document).ready(function() {
       if(cat === 0){
         var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
         printLog('you found recipe: '+r.name);
-        player['backpack'].push(r);
+        backpack.push(r);
       }
       //get universal items
       else if(cat === 1 || cat === 2){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
         printLog('you found: '+i.name);
-        player['backpack'].push(i);
+        backpack.push(i);
       }
       //get district items
       else if(cat === 3 || cat === 4){
         var i = here[getRandomInt(0,here.length - 1)];
         printLog('you found: '+i.name);
-        player['backpack'].push(i);
+        backpack.push(i);
       }
       //get other 2 district items
       else if(cat === 5) {
         var i = there1[getRandomInt(0,there1.length - 1)];
         printLog('you found: '+i.name);
-        player['backpack'].push(i);
+        backpack.push(i);
       }
       else if(cat === 6){
         var i = there2[getRandomInt(0,there2.length - 1)];
         printLog('you found: '+i.name);
-        player['backpack'].push(i);
+        backpack.push(i);
       }
     }
-    console.log(player['backpack']);
+    console.log(backpack);
   }
 
   function findNewLoc(){
     //consume 1 action
-    player["actionsLeft"] -= 1
+    actionsLeft -= 1
     updatePartyStatsView();
     //get new location
     var firstThreeId = $(this).attr('id').substr(0,3);
