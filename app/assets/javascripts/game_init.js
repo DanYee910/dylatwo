@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
 // JS load game assets from database
-  eventslist = $.parseJSON($('#info_events').attr('data_events'))
-  locationslist = $.parseJSON($('#info_locations').attr('data_locations'))
-  itemslist = $.parseJSON($('#info_items').attr('data_items'))
-  recipeslist = $.parseJSON($('#info_recipes').attr('data_recipes'))
+  eventslist = gon.events
+  locationslist = gon.locations
+  itemslist = gon.items
+  recipeslist = gon.recipes
 
   // separate locations by district
   for(var idx = 0; idx < locationslist.length; idx++){

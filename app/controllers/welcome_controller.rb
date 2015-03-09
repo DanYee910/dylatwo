@@ -1,8 +1,8 @@
 class WelcomeController < ApplicationController
   def index
-    @events = Event.all
-    @locations = Location.all
-    @items = Item.all
-    @recipes = Recipe.all
+    gon.events = Event.all
+    gon.locations = Location.all
+    gon.items = Item.all
+    gon.recipes = Recipe.all
   end
 end
