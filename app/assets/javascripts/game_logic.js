@@ -20,7 +20,7 @@ $(document).ready(function() {
     untilEndofTurn.modReckless = 0;
     untilEndofTurn.modThorough = 0;
     untilEndofTurn.modZombieStrength = 0;
-    untilEndofTurn.actionsLeft = permStats.actions + untilEndofTurn.modActions;
+    untilEndofTurn.actionsLeft = moddedStats.actions;
   }
 
   //functions to add handlers
@@ -61,10 +61,10 @@ $(document).ready(function() {
   }
   //update away party stats
   function updatePartyStatsView(){
-    $('#party-attack').html(permStats.attack);
-    $('#party-actions').html(untilEndofTurn.actionsLeft);
-    $('#party-reckless').html(permStats.reckless);
-    $('#party-thorough').html(permStats.thorough);
+    $('#party-attack').html(moddedStats.attack);
+    $('#party-actions').html(moddedStats.actions);
+    $('#party-reckless').html(moddedStats.reckless);
+    $('#party-thorough').html(moddedStats.thorough);
   }
 
   //show a new location
@@ -150,22 +150,20 @@ $(document).ready(function() {
       numRewards = getRandomInt(0,6);
     }
     //add reckless penalties
-    zmax += permStats.reckless += untilEndofTurn.modReckless
+    zmax += moddedStats.reckless
     //add thorough bonus
-    numRewards += permStats.thorough += untilEndofTurn.modThorough
+    numRewards += moddedStats.thorough
     // fight with final values
     setTimeout(function(){fightZombies(zmin, zmax, numRewards)}, 1500);
   }
 
   //combat
   function fightZombies(min, max, num){
-    //add player attack and temp mods
-    var finalAtk = permStats.attack + untilEndofTurn.modAttack;
     //add random zombie roll plus mods
-    z = getRandomInt(min, max);
-    var finalZ = z + untilEndofTurn.modZombieStrength;
+    var z = getRandomInt(min, max);
+    z += untilEndofTurn.modZombieStrength;
     //combat
-    if(finalAtk >= finalZ){
+    if(moddedStats.attack >= z){
       //success, add items to backpack
       printLog('Zombies defeated, found '+num+' items!');
       setTimeout(function(){findItems(gameVars.district, num)}, 1000);

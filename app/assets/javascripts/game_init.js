@@ -48,9 +48,16 @@ $(document).ready(function() {
 });
 
 function initGameState(){
+  //set permanent
   permStats.attack = 1;
   permStats.actions = 3;
-  untilEndofTurn.actionsLeft = permStats.actions;
   permStats.reckless = 0;
   permStats.thorough = 0;
+  //add temporary bonuses
+  moddedStats.attack = permStats.attack + untilEndofTurn.modAttack;
+  moddedStats.actions = permStats.actions + untilEndofTurn.modActions;
+  moddedStats.reckless = permStats.reckless + untilEndofTurn.modReckless;
+  moddedStats.thorough = permStats.thorough + untilEndofTurn.modThorough;
+  //set actions for turn
+  untilEndofTurn.actionsLeft = moddedStats.actions;
 }

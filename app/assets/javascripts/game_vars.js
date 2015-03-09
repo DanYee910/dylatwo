@@ -41,6 +41,13 @@ var untilEndofTurn = {
   modZombieStrength: 0
 }
 
+var moddedStats = {
+  attack: 0,
+  actions: 0,
+  reckless: 0,
+  thorough: 0
+}
+
 var gameState = {
   turns: 0,
   food: 4,
