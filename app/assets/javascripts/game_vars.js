@@ -2,12 +2,6 @@
 var turns;
 var maxMessages = 50;
 
-//declare data variables
-var eventslist;
-var locationslist;
-var itemslist;
-var recipeslist;
-
 //locations decks
 var allsuburbs = [];
 var alldowntown = [];
@@ -51,4 +45,11 @@ var untilEndofTurn = {
   modReckless: 0,
   modThorough: 0,
   modZombieStrength: 0
+}
+
+var gameState = {
+  all_events: [],
+  all_locations: [],
+  all_items: [],
+  all_recipes: []
 }

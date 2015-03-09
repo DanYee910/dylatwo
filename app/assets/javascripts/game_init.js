@@ -1,47 +1,48 @@
 $(document).ready(function() {
 
 // JS load game assets from database
-  eventslist = gon.events
-  locationslist = gon.locations
-  itemslist = gon.items
-  recipeslist = gon.recipes
+  gameState.all_events = gon.events
+  gameState.all_locations = gon.locations
+  gameState.all_items = gon.items
+  gameState.all_recipes = gon.recipes
 
+  var i;
   // separate locations by district
-  for(var idx = 0; idx < locationslist.length; idx++){
-    var templocation = locationslist[idx].district;
+  for(i = 0; i < gameState.all_locations.length; i++){
+    var templocation = gameState.all_locations[i].district;
     if(templocation === "Suburbs"){
-      allsuburbs.push(locationslist[idx]);
+      allsuburbs.push(gameState.all_locations[i]);
     }
     else if(templocation === "Downtown"){
-      alldowntown.push(locationslist[idx]);
+      alldowntown.push(gameState.all_locations[i]);
     }
     else {
-      allwharf.push(locationslist[idx]);
+      allwharf.push(gameState.all_locations[i]);
     }
   }
   //separate items by location
-  for(var idx = 0; idx < itemslist.length; idx++){
-    var tempspawn = itemslist[idx].spawnarea;
+  for(i = 0; i < gameState.all_items.length; i++){
+    var tempspawn = gameState.all_items[i].spawnarea;
     if(tempspawn === "Suburbs"){
-      suburbItems.push(itemslist[idx])
+      suburbItems.push(gameState.all_items[i])
     }
     else if(tempspawn === "Downtown"){
-      downtownItems.push(itemslist[idx])
+      downtownItems.push(gameState.all_items[i])
     }
     else if(tempspawn === "Wharf"){
-      wharfItems.push(itemslist[idx])
+      wharfItems.push(gameState.all_items[i])
     }
     else{
-      universalItems.push(itemslist[idx])
+      universalItems.push(gameState.all_items[i])
     }
   }
   //add starting recipes to players available recipes, others to game
-  for(var idx = 0; idx < recipeslist.length; idx++){
-    var startType = recipeslist[idx].starting;
+  for(i = 0; i < gameState.all_recipes.length; i++){
+    var startType = gameState.all_recipes[i].starting;
     if(startType === "true"){
-        recipes.push(recipeslist[idx]);
+        recipes.push(gameState.all_recipes[i]);
     } else {
-      gameRecipes.push(recipeslist[idx]);
+      gameRecipes.push(gameState.all_recipes[i]);
     }
   }
 });
