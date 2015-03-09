@@ -8,12 +8,12 @@ $(document).ready(function() {
 
   var i;
   // separate locations by district
-  for(i = 0; i < gameState.all_locations.length; i++){
+  for (i = 0; i < gameState.all_locations.length; i++) {
     var templocation = gameState.all_locations[i].district;
-    if(templocation === "Suburbs"){
+    if(templocation === "Suburbs") {
       allsuburbs.push(gameState.all_locations[i]);
     }
-    else if(templocation === "Downtown"){
+    else if (templocation === "Downtown") {
       alldowntown.push(gameState.all_locations[i]);
     }
     else {
@@ -21,25 +21,25 @@ $(document).ready(function() {
     }
   }
   //separate items by location
-  for(i = 0; i < gameState.all_items.length; i++){
+  for (i = 0; i < gameState.all_items.length; i++) {
     var tempspawn = gameState.all_items[i].spawnarea;
-    if(tempspawn === "Suburbs"){
+    if (tempspawn === "Suburbs") {
       suburbItems.push(gameState.all_items[i])
     }
-    else if(tempspawn === "Downtown"){
+    else if (tempspawn === "Downtown") {
       downtownItems.push(gameState.all_items[i])
     }
-    else if(tempspawn === "Wharf"){
+    else if (tempspawn === "Wharf") {
       wharfItems.push(gameState.all_items[i])
     }
-    else{
+    else {
       universalItems.push(gameState.all_items[i])
     }
   }
   //add starting recipes to players available recipes, others to game
-  for(i = 0; i < gameState.all_recipes.length; i++){
+  for (i = 0; i < gameState.all_recipes.length; i++) {
     var startType = gameState.all_recipes[i].starting;
-    if(startType === "true"){
+    if (startType) {
         recipes.push(gameState.all_recipes[i]);
     } else {
       gameRecipes.push(gameState.all_recipes[i]);
