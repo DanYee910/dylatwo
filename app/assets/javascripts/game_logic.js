@@ -1,17 +1,17 @@
 $(document).ready(function() {
   //add explore handlers
-  addHandler('subq', exploreHere);
-  addHandler('subc', exploreHere);
-  addHandler('subf', exploreHere);
-  addHandler('dowq', exploreHere);
-  addHandler('dowc', exploreHere);
-  addHandler('dowf', exploreHere);
-  addHandler('whaq', exploreHere);
-  addHandler('whac', exploreHere);
-  addHandler('whaf', exploreHere);
-  addHandler('sube', findNewLoc);
-  addHandler('dowe', findNewLoc);
-  addHandler('whae', findNewLoc);
+  addExploreHandler('subq', 'quick', 'suburbs');
+  addExploreHandler('subc', 'cautious', 'suburbs');
+  addExploreHandler('subf', 'full',  'suburbs');
+  addExploreHandler('dowq', 'quick', 'downtown');
+  addExploreHandler('dowc', 'cautious', 'downtown');
+  addExploreHandler('dowf', 'full',  'downtown');
+  addExploreHandler('whaq', 'quick', 'wharf');
+  addExploreHandler('whac', 'cautious', 'wharf');
+  addExploreHandler('whaf', 'full',  'wharf');
+  addFindLocHandler('sube', 'suburbs');
+  addFindLocHandler('dowe', 'downtown');
+  addFindLocHandler('whae', 'wharf');
 
   //remove EoT effects
   function clearEndofTurn(){
@@ -23,10 +23,27 @@ $(document).ready(function() {
     actionsLeft = actions;
   }
 
-  //function to add handlers
-  function addHandler(id, functionReference){
-    $('#'+id+'').on('click', functionReference);
+  //functions to add handlers
+  function addExploreHandler(id, diff, district){
+    $('#'+id+'').on('click', function(){
+      if(actionsLeft > 0){
+        exploreHere(diff, district);
+      } else{
+        printLog('Not enough actions!');
+      }
+    });
   }
+
+  function addFindLocHandler(id, district){
+    $('#'+id+'').on('click', function(){
+      if(actionsLeft > 0){
+        findNewLoc(district);
+      } else{
+        printLog('Not enough actions!');
+      }
+    });
+  }
+
 
   //random int function
   function getRandomInt(min, max) {
@@ -72,7 +89,7 @@ $(document).ready(function() {
 
     //update correct view with this location
     // $('#'+district+' .locationimg').attr('src', locObj.imgtag);
-    $('#'+district+' .locname').html(locObj.name);
+    $('#'+district+' .loc-name').html(locObj.name);
     $('#'+district+' .qmin').html(locObj.fastmin);
     $('#'+district+' .qmax').html(locObj.fastmax);
     $('#'+district+' .cmin').html(locObj.medmin);
@@ -96,25 +113,21 @@ $(document).ready(function() {
   }
 
   //explore
-  function exploreHere(){
+  function exploreHere(diff, district){
     //consume 1 action
     actionsLeft -= 1
     updatePartyStatsView();
-    //find current explore diff, quick, cautious, or full
-    currentExploreDiff = $(this).parent().parent().attr('class');
+    currentExploreDiff = diff;
+    currentDistrict = district;
 
     //find location
-    var firstThreeId = $(this).attr('id').substr(0,3);
-    if(firstThreeId === "sub"){
-      currentDistrict = "suburbs";
+    if(currentDistrict === "suburbs"){
       currentLocation = currentSuburbs;
     }
-    else if(firstThreeId === "dow"){
-      currentDistrict = "downtown";
+    else if(currentDistrict === "downtown"){
       currentLocation = currentDowntown;
     }
     else {
-      currentDistrict = "wharf";
       currentLocation = currentWharf;
     }
     printLog('Searching '+currentLocation.name+'...');
@@ -137,6 +150,8 @@ $(document).ready(function() {
       zmax = currentLocation.slowmax;
       numRewards = getRandomInt(0,6);
     }
+    //add thorough bonus
+    // numRewards += untilEndofTurn.modThorough
 
     setTimeout(function(){fightZombies(zmin, zmax, numRewards)}, 1500);
   }
@@ -216,21 +231,20 @@ $(document).ready(function() {
     console.log(backpack);
   }
 
-  function findNewLoc(){
+  function findNewLoc(district){
     //consume 1 action
     actionsLeft -= 1
     updatePartyStatsView();
     //get new location
-    var firstThreeId = $(this).attr('id').substr(0,3);
-    if(firstThreeId === "sub"){
-      showNewLocation("suburbs", allsuburbs);
+    if(district === "suburbs"){
+      showNewLocation("suburbs", allSuburbs);
       printLog('Found a new place in the suburbs.');
     }
-    else if(firstThreeId === "dow"){
-      showNewLocation("downtown", alldowntown);
+    else if(district === "downtown"){
+      showNewLocation("downtown", allDowntown);
       printLog('Found a new place downtown');
     } else {
-      showNewLocation("wharf", allwharf);
+      showNewLocation("wharf", allWharf);
       printLog('Found a new place at the wharf');
     }
   }
