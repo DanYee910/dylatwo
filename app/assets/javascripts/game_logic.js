@@ -62,7 +62,7 @@ $(document).ready(function() {
   //update away party stats
   function updatePartyStatsView(){
     $('#party-attack').html(moddedStats.attack);
-    $('#party-actions').html(moddedStats.actions);
+    $('#party-actions').html(untilEndofTurn.actionsLeft);
     $('#party-reckless').html(moddedStats.reckless);
     $('#party-thorough').html(moddedStats.thorough);
   }
