@@ -20,13 +20,13 @@ $(document).ready(function() {
     untilEndofTurn.modReckless = 0;
     untilEndofTurn.modThorough = 0;
     untilEndofTurn.modZombieStrength = 0;
-    actionsLeft = actions;
+    untilEndofTurn.actionsLeft = permStats.actions + untilEndofTurn.modActions;
   }
 
   //functions to add handlers
   function addExploreHandler(id, diff, district){
     $('#'+id+'').on('click', function(){
-      if(actionsLeft > 0){
+      if(untilEndofTurn.actionsLeft > 0){
         exploreHere(diff, district);
       } else{
         printLog('Not enough actions!');
@@ -36,14 +36,13 @@ $(document).ready(function() {
 
   function addFindLocHandler(id, district){
     $('#'+id+'').on('click', function(){
-      if(actionsLeft > 0){
+      if(untilEndofTurn.actionsLeft > 0){
         findNewLoc(district);
       } else{
         printLog('Not enough actions!');
       }
     });
   }
-
 
   //random int function
   function getRandomInt(min, max) {
@@ -62,10 +61,10 @@ $(document).ready(function() {
   }
   //update away party stats
   function updatePartyStatsView(){
-    $('#party-attack').html(attack);
-    $('#party-actions').html(actionsLeft);
-    $('#party-reckless').html(reckless);
-    $('#party-thorough').html(thorough);
+    $('#party-attack').html(permStats.attack);
+    $('#party-actions').html(untilEndofTurn.actionsLeft);
+    $('#party-reckless').html(permStats.reckless);
+    $('#party-thorough').html(permStats.thorough);
   }
 
   //show a new location
@@ -78,13 +77,13 @@ $(document).ready(function() {
 
     //store as current loc variable
     if(district === "suburbs"){
-      currentSuburbs = locObj;
+      gameVars.suburbs = locObj;
     }
     else if(district === "downtown"){
-      currentDowntown = locObj;
+      gameVars.downtown = locObj;
     }
     else{
-      currentWharf = locObj;
+      gameVars.wharf = locObj;
     }
 
     //update correct view with this location
@@ -105,61 +104,63 @@ $(document).ready(function() {
     var min = 0
     var max = gameState.allEvents.length - 1
     var idx = getRandomInt(min, max)
-    currentEvent = gameState.allEvents[idx]
+    gameVars.evnt = gameState.allEvents[idx]
 
-    $('#current-event .event-name').html('Event: ' + currentEvent.name);
-    $('#current-event .event-txt').html(currentEvent.flavortext);
-    $('#current-event .event-effect').html('End of Turn => '+currentEvent.effect);
+    $('#current-event .event-name').html('Event: ' + gameVars.evnt.name);
+    $('#current-event .event-txt').html(gameVars.evnt.flavortext);
+    $('#current-event .event-effect').html('End of Turn => '+gameVars.evnt.effect);
   }
 
   //explore
   function exploreHere(diff, district){
     //consume 1 action
-    actionsLeft -= 1
+    untilEndofTurn.actionsLeft -= 1
     updatePartyStatsView();
-    currentExploreDiff = diff;
-    currentDistrict = district;
+    gameVars.exploreDiff = diff;
+    gameVars.district = district;
 
     //find location
-    if(currentDistrict === "suburbs"){
-      currentLocation = currentSuburbs;
+    if(gameVars.district === "suburbs"){
+      gameVars.location = gameVars.suburbs;
     }
-    else if(currentDistrict === "downtown"){
-      currentLocation = currentDowntown;
+    else if(gameVars.district === "downtown"){
+      gameVars.location = gameVars.downtown;
     }
     else {
-      currentLocation = currentWharf;
+      gameVars.location = gameVars.wharf;
     }
-    printLog('Searching '+currentLocation.name+'...');
+    printLog('Searching '+gameVars.location.name+'...');
 
     //find fight values here
     var zmin;
     var zmax;
     var numRewards;//up to 2 for quick, 4 for cautious, 6 full
-    if(currentExploreDiff === 'quick'){
-      zmin = currentLocation.fastmin;
-      zmax = currentLocation.fastmax;
+    if(gameVars.exploreDiff === 'quick'){
+      zmin = gameVars.location.fastmin;
+      zmax = gameVars.location.fastmax;
       numRewards = getRandomInt(0,2);
     }
     else if(currentExploreDiff === 'cautious'){
-      zmin = currentLocation.medmin;
-      zmax = currentLocation.medmax;
+      zmin = gameVars.location.medmin;
+      zmax = gameVars.location.medmax;
       numRewards = getRandomInt(0,4);
     } else {
-      zmin = currentLocation.slowmin;
-      zmax = currentLocation.slowmax;
+      zmin = gameVars.location.slowmin;
+      zmax = gameVars.location.slowmax;
       numRewards = getRandomInt(0,6);
     }
+    //add reckless penalties
+    zmax += permStats.reckless += untilEndofTurn.modReckless
     //add thorough bonus
-    // numRewards += untilEndofTurn.modThorough
-
+    numRewards += permStats.thorough += untilEndofTurn.modThorough
+    // fight with final values
     setTimeout(function(){fightZombies(zmin, zmax, numRewards)}, 1500);
   }
 
   //combat
   function fightZombies(min, max, num){
     //add player attack and temp mods
-    var finalAtk = attack + untilEndofTurn.modAttack;
+    var finalAtk = permStats.attack + untilEndofTurn.modAttack;
     //add random zombie roll plus mods
     z = getRandomInt(min, max);
     var finalZ = z + untilEndofTurn.modZombieStrength;
@@ -167,7 +168,7 @@ $(document).ready(function() {
     if(finalAtk >= finalZ){
       //success, add items to backpack
       printLog('Zombies defeated, found '+num+' items!');
-      setTimeout(function(){findItems(currentDistrict, num)}, 1000);
+      setTimeout(function(){findItems(gameVars.district, num)}, 1000);
     }
     else{
       //fail, get nothing
@@ -202,38 +203,38 @@ $(document).ready(function() {
       if(cat === 0){
         var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
         printLog('you found recipe: '+r.name);
-        backpack.push(r);
+        permStats.backpack.push(r);
       }
       //get universal items
       else if(cat === 1 || cat === 2){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
         printLog('you found: '+i.name);
-        backpack.push(i);
+        permStats.backpack.push(i);
       }
       //get district items
       else if(cat === 3 || cat === 4){
         var i = here[getRandomInt(0,here.length - 1)];
         printLog('you found: '+i.name);
-        backpack.push(i);
+        permStats.backpack.push(i);
       }
       //get other 2 district items
       else if(cat === 5) {
         var i = there1[getRandomInt(0,there1.length - 1)];
         printLog('you found: '+i.name);
-        backpack.push(i);
+        permStats.backpack.push(i);
       }
       else if(cat === 6){
         var i = there2[getRandomInt(0,there2.length - 1)];
         printLog('you found: '+i.name);
-        backpack.push(i);
+        permStats.backpack.push(i);
       }
     }
-    console.log(backpack);
+    console.log(permStats.backpack);
   }
 
   function findNewLoc(district){
     //consume 1 action
-    actionsLeft -= 1
+    untilEndofTurn.actionsLeft -= 1
     updatePartyStatsView();
     //get new location
     if(district === "suburbs"){

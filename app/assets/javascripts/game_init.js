@@ -40,7 +40,7 @@ $(document).ready(function() {
   for (i = 0; i < gameState.allRecipes.length; i++) {
     var startType = gameState.allRecipes[i].starting;
     if (startType) {
-        recipes.push(gameState.allRecipes[i]);
+        gameState.recipes.push(gameState.allRecipes[i]);
     } else {
       gameRecipes.push(gameState.allRecipes[i]);
     }
@@ -48,9 +48,9 @@ $(document).ready(function() {
 });
 
 function initGameState(){
-  attack = 1;
-  actions = 3;
-  actionsLeft = actions;
-  reckless = 0;
-  thorough = 0;
+  permStats.attack = 1;
+  permStats.actions = 3;
+  untilEndofTurn.actionsLeft = permStats.actions;
+  permStats.reckless = 0;
+  permStats.thorough = 0;
 }

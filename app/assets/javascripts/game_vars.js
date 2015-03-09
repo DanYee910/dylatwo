@@ -12,29 +12,28 @@ var wharfItems = [];
 var universalItems = [];
 var gameRecipes = [];
 
-//player stats
-var backpack = [];//temp storage from exploring
-// var commonMats = 0;
-// var uncommonMats = 0;
-// var rareMats = 0;
-var recipes = [];
-var attack = 0;
-var actions = 0;
-var actionsLeft = 0;
-var reckless = 0; //more zombies encountered
-var thorough = 0; //more items found
-
 //game variables
-var currentDowntown;
-var currentSuburbs;
-var currentWharf;
-var currentExploreDiff;
-var currentDistrict;
-var currentLocation;
-var currentEvent;
+var gameVars = {
+  downtown: '',
+  suburbs: '',
+  wharf: '',
+  exploreDiff: '',
+  district: '',
+  location: '',
+  evnt: ''
+}
 
+//permanent away party stats
+var permStats = {
+  backpack: [],//temp storage from exploring, empty end of turn
+  attack: 0,
+  actions: 0,
+  reckless: 0, //+max range zombies encountered
+  thorough: 0 //more items found
+}
 //modifications that last this turn only
 var untilEndofTurn = {
+  actionsLeft: 0,
   modAttack: 0,
   modActions: 0,
   modReckless: 0,
@@ -53,6 +52,7 @@ var gameState = {
     uncommon: 0,
     rare: 0
   },
+  recipes: [],
   allEvents: [],
   allLocations: [],
   allItems: [],
