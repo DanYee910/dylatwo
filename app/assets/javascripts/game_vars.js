@@ -1,5 +1,3 @@
-//game stats
-var turns;
 var maxMessages = 50;
 
 //locations decks
@@ -16,10 +14,6 @@ var gameRecipes = [];
 
 //player stats
 var backpack = [];//temp storage from exploring
-var food = 0;
-var morale = 0;
-var shelter = 0;
-var tools = 0;
 var common_mats = 0;
 var uncommon_mats = 0;
 var rare_mats = 0;
@@ -49,6 +43,15 @@ var untilEndofTurn = {
 
 var gameState = {
   turns: 0,
+  food: 4,
+  morale: 4,
+  shelter: 4,
+  tools: 1,
+  mat: {
+    common: 2,
+    uncommon: 0,
+    rare: 0
+  },
   allEvents: [],
   allLocations: [],
   allItems: [],

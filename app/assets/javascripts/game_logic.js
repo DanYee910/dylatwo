@@ -38,14 +38,14 @@ $(document).ready(function() {
   }
   //update the stats sidebar view with current player values
   function updatePlayerStatsView(){
-    $('#sidebarturns').html(turns);
-    $('#sidebarfood').html(food);
-    $('#sidebarmorale').html(morale);
-    $('#sidebarshelter').html(shelter);
-    $('#sidebartools').html(tools);
-    $('#sidebarcommon').html(common_mats);
-    $('#sidebaruncommon').html(uncommon_mats);
-    $('#sidebarrare').html(rare_mats);
+    $('#sidebar-turns').html(gameState.turns);
+    $('#sidebar-food').html(gameState.food);
+    $('#sidebar-morale').html(gameState.morale);
+    $('#sidebar-shelter').html(gameState.shelter);
+    $('#sidebar-tools').html(gameState.tools);
+    $('#sidebar-common').html(gameState.mat.common);
+    $('#sidebar-uncommon').html(gameState.mat.uncommon);
+    $('#sidebar-rare').html(gameState.mat.rare);
   }
   //update away party stats
   function updatePartyStatsView(){

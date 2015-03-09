@@ -48,14 +48,6 @@ $(document).ready(function() {
 });
 
 function initGameState(){
-  turns = 0;
-  food = 4;
-  morale = 4;
-  shelter = 4;
-  tools = 1;
-  common_mats = 2;
-  uncommon_mats = 0;
-  rare_mats = 0;
   attack = 1;
   actions = 3;
   actionsLeft = actions;
