@@ -48,8 +48,9 @@ var untilEndofTurn = {
 }
 
 var gameState = {
-  all_events: [],
-  all_locations: [],
-  all_items: [],
-  all_recipes: []
+  turns: 0,
+  allEvents: [],
+  allLocations: [],
+  allItems: [],
+  allRecipes: []
 }

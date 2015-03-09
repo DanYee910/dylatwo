@@ -90,9 +90,9 @@ $(document).ready(function() {
   function newEvent(){
     //get random event
     var min = 0
-    var max = gameState.all_events.length - 1
+    var max = gameState.allEvents.length - 1
     var idx = getRandomInt(min, max)
-    var event = gameState.all_events[idx]
+    var event = gameState.allEvents[idx]
 
     $('#currentevent .eventname').html('Event: ' + event.name);
     $('#currentevent .eventtxt').html(event.flavortext);
