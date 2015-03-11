@@ -248,7 +248,22 @@ $(document).ready(function() {
     }
   }
 
+  //compare func to sort recipes by name alpabetically
+  function sortName(a,b) {
+    if (a.name < b.name)
+       return -1;
+    if (a.name > b.name)
+      return 1;
+    return 0;
+  }
+
   //add available recipes to view
+  function showAvailRecipes(){
+    gameState.recipes.sort(sortName);
+    for (var i = 0; i < gameState.recipes.length; i++) {
+      $('.recipe-table').append('<tr><td class="recipe-row">'+gameState.recipes[i].name+'</td></tr>')
+    }
+  }
 
   //print message to game log
   function printLog(string){
@@ -270,4 +285,6 @@ $(document).ready(function() {
   showNewLocation("wharf", allWharf);
   //get an event
   newEvent();
+  //show recipes
+  showAvailRecipes();
 })

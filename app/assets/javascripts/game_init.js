@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   var i;
   // separate locations by district
-  for (i = 0; i < gameState.allLocations.length; i++) {
+  for (var i = 0; i < gameState.allLocations.length; i++) {
     var templocation = gameState.allLocations[i].district;
     if(templocation === "Suburbs") {
       allSuburbs.push(gameState.allLocations[i]);
@@ -21,7 +21,7 @@ $(document).ready(function() {
     }
   }
   //separate items by location
-  for (i = 0; i < gameState.allItems.length; i++) {
+  for (var i = 0; i < gameState.allItems.length; i++) {
     var tempspawn = gameState.allItems[i].spawnarea;
     if (tempspawn === "Suburbs") {
       suburbItems.push(gameState.allItems[i])
@@ -37,7 +37,7 @@ $(document).ready(function() {
     }
   }
   //add starting recipes to players available recipes, others to game
-  for (i = 0; i < gameState.allRecipes.length; i++) {
+  for (var i = 0; i < gameState.allRecipes.length; i++) {
     var startType = gameState.allRecipes[i].starting;
     if (startType) {
         gameState.recipes.push(gameState.allRecipes[i]);
