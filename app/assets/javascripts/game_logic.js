@@ -12,6 +12,11 @@ $(document).ready(function() {
   addFindLocHandler('sube', 'suburbs');
   addFindLocHandler('dowe', 'downtown');
   addFindLocHandler('whae', 'wharf');
+  //handler to highlight selected recipe
+  $('#my-camp').on('click', '.recipe-row', function(){
+    $('.recipe-row').removeClass('selected')
+    $(this).toggleClass('selected')
+  })
 
   //remove EoT effects
   function clearEndofTurn(){
@@ -263,6 +268,8 @@ $(document).ready(function() {
     for (var i = 0; i < gameState.recipes.length; i++) {
       $('.recipe-table').append('<tr><td class="recipe-row">'+gameState.recipes[i].name+'</td></tr>')
     }
+    //adding handlers for hover selection
+    $('.recipe-row').hover(function(){$(this).toggleClass('hovering')})
   }
 
   //print message to game log

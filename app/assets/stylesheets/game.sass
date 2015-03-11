@@ -127,6 +127,8 @@ html
   .home-tab
     width: 200px
     height: 30px
+    padding-top: 5px
+    text-align: center
     background-color: #333333
     display: inline-block
   .camp-panel
@@ -140,9 +142,21 @@ html
       width: 400px
       height: 200px
       overflow: scroll
-      background-color: white
+      background-color: $medlight
       display: inline-block
       vertical-align: bottom
+      .recipe-table
+        width: 99%
+      .recipe-table tr
+        line-height: 200%
+      .recipe-row
+        background-color: black
+        border: 2px solid $light
+      .hovering
+        background-color: $meddark
+      .selected
+        background-color: $medlight
+        border: 2px solid $zgreen
     #current-recipe
       width: 400px
       height: 200px
@@ -164,8 +178,4 @@ html
     font-size: 20px
     text-align: center
     border: 1px solid black
-  .recipe-table
-    width: 99%
-  .recipe-row
-    background-color: black
-    border: 1px solid red
+
