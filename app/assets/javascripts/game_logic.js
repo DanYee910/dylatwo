@@ -248,6 +248,8 @@ $(document).ready(function() {
     }
   }
 
+  //add available recipes to view
+
   //print message to game log
   function printLog(string){
     if($('.game-log tr').length === maxMessages){
