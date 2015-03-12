@@ -32,9 +32,9 @@ recipes = [
   {name:'Bicycle', starting:'false',tools:2, materials:'Common Material: -2, Uncommon Material: -1', effect: 'Actions: +1', flavortext:'Quiet and efficient transportation, no gas required.'},
   {name:'Electric Generator', starting:'false',tools:4, materials:'Uncommon Material: -3, Rare Material: -3', effect: 'Shelter: +2, Tools: +1', flavortext:'In good condition, can never get enough electricity.'},
   {name:'Portable stove', starting:'false',tools:2, materials:'Common Material: -1, Uncommon Material: -1', effect: 'Food: +2', flavortext:'Takes a while to warm up, but works.'},
-  {name:'Bat with nails', starting:'true',tools:1, materials:'common material: -2', effect: 'Attack: +1', flavortext:'Crude weapon, but gets the job done.'},
-  {name:'Pointy stick', starting:'true',tools:1, materials:'common material: -2', effect: 'Attack: +1', flavortext:'Watch where you point it.'},
-  {name:'Walls', starting:'true',tools:2, materials:'common material: -4', effect: 'shelter: +1', flavortext:'Tents only last so long.'}
+  {name:'Bat with nails', starting:'true',tools:1, materials:'Common Material: -2', effect: 'Attack: +1', flavortext:'Crude weapon, but gets the job done.'},
+  {name:'Pointy stick', starting:'true',tools:1, materials:'Common Material: -2', effect: 'Attack: +1', flavortext:'Watch where you point it.'},
+  {name:'Walls', starting:'true',tools:2, materials:'Common Material: -4', effect: 'Shelter: +1', flavortext:'Tents only last so long.'}
 ]
 # get all-------------
 events.each do |ev|

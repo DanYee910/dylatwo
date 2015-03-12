@@ -53,6 +53,10 @@ function initGameState(){
   permStats.actions = 3;
   permStats.reckless = 0;
   permStats.thorough = 0;
+  refreshPartyStats();
+}
+
+function refreshPartyStats(){
   //add temporary bonuses
   moddedStats.attack = permStats.attack + untilEndofTurn.modAttack;
   moddedStats.actions = permStats.actions + untilEndofTurn.modActions;

@@ -23,6 +23,16 @@ $(document).ready(function() {
     var idx = $('.recipe-table tr td').index($('.selected'));
     showSelectedRecipe(idx);
   })
+  //handler to craft
+  $('.craft-button').on('click', function(){
+    var idx = $('.recipe-table tr td').index($('.selected'));
+    craftSelected(idx);
+  })
+  //end of turn button handler
+  $('#end-turn').on('click',function(){
+    clearEndofTurn();
+    getEffects();
+  })
 
   //remove EoT effects
   function clearEndofTurn(){
@@ -72,6 +82,7 @@ $(document).ready(function() {
   }
   //update away party stats
   function updatePartyStatsView(){
+    refreshPartyStats();
     $('#party-attack').html(moddedStats.attack);
     $('#party-actions').html(untilEndofTurn.actionsLeft);
     $('#party-reckless').html(moddedStats.reckless);
@@ -151,7 +162,7 @@ $(document).ready(function() {
       zmax = gameVars.location.fastmax;
       numRewards = getRandomInt(0,2);
     }
-    else if(currentExploreDiff === 'cautious'){
+    else if(gameVars.exploreDiff === 'cautious'){
       zmin = gameVars.location.medmin;
       zmax = gameVars.location.medmax;
       numRewards = getRandomInt(0,4);
@@ -210,7 +221,7 @@ $(document).ready(function() {
       var cat = getRandomInt(0,6);
       //get recipes
       if(cat === 0){
-        var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
+        var r = gameState.allRecipes[getRandomInt(0,gameState.allRecipes.length - 1)];
         printLog('you found recipe: '+r.name);
         permStats.backpack.push(r);
       }
@@ -280,11 +291,100 @@ $(document).ready(function() {
 
   function showSelectedRecipe(idx){
     var rec = gameState.recipes[idx];
-    console.log(rec.name);
     $('.rec-name').html(rec.name);
     $('.rec-flav').html(rec.flavortext);
+    $('.rec-tools').html(rec.tools);
     $('.rec-mats').html(rec.materials);
     $('.rec-effect').html(rec.effect);
+  }
+
+  function craftSelected(idx){
+    var rec = gameState.recipes[idx];
+    var allreqs = parseMats(rec.materials);
+    spendMats(allreqs);
+    //dont get bonus till end of turn
+    parseEffects(rec.effect);
+  }
+
+  function parseMats(string){
+    var cmatch = string.match(/Common Material: (\-|\+)\d/);
+    var umatch = string.match(/Uncommon Material: (\-|\+)\d/);
+    var rmatch = string.match(/Rare Material: (\-|\+)\d/);
+    var reqs = {
+      c: 0,
+      u: 0,
+      r: 0
+    }
+
+    if(cmatch){
+      reqs.c = parseInt(cmatch[0].slice(-2));
+    }
+    if(umatch){
+      reqs.u = parseInt(umatch[0].slice(-2));
+    }
+    if(rmatch){
+      reqs.r = parseInt(rmatch[0].slice(-2));
+    }
+    return reqs;
+  }
+
+  function spendMats(matreqs){
+    gameState.mat.common += matreqs.c;
+    gameState.mat.uncommon += matreqs.u;
+    gameState.mat.rare += matreqs.r;
+    updatePlayerStatsView();
+  }
+
+  function parseEffects(string){
+    var foodmatch = string.match(/Food: (\-|\+)\d/);
+    var shltrmatch = string.match(/Shelter: (\-|\+)\d/);
+    var mrlmatch = string.match(/Morale: (\-|\+)\d/);
+    var toolsmatch = string.match(/Tools: (\-|\+)\d/);
+    var atkmatch = string.match(/Attack: (\-|\+)\d/);
+    var actionsmatch = string.match(/Actions: (\-|\+)\d/);
+    var rcklssmatch = string.match(/Reckless: (\-|\+)\d/);
+    var thrmatch = string.match(/Thorough: (\-|\+)\d/);
+
+    if(foodmatch){
+      bonusesAtEoT.food += parseInt(foodmatch[0].slice(-2));
+    }
+    if(shltrmatch){
+      bonusesAtEoT.shelter += parseInt(shltrmatch[0].slice(-2));
+    }
+    if(mrlmatch){
+      bonusesAtEoT.morale += parseInt(mrlmatch[0].slice(-2));
+    }
+    if(toolsmatch){
+      bonusesAtEoT.tools += parseInt(toolsmatch[0].slice(-2));
+    }
+    if(atkmatch){
+      bonusesAtEoT.attack += parseInt(atkmatch[0].slice(-2));
+    }
+    if(actionsmatch){
+      bonusesAtEoT.actions += parseInt(actionsmatch[0].slice(-2));
+    }
+    if(rcklssmatch){
+      bonusesAtEoT.reckless += parseInt(rcklssmatch[0].slice(-2));
+    }
+    if(thrmatch){
+      bonusesAtEoT.thorough += parseInt(thrmatch[0].slice(-2));
+    }
+  }
+
+  function getEffects(){
+    gameState.food += bonusesAtEoT.food;
+    gameState.shelter += bonusesAtEoT.shelter;
+    gameState.morale += bonusesAtEoT.morale;
+    gameState.tools += bonusesAtEoT.tools;
+    permStats.attack += bonusesAtEoT.attack;
+    permStats.actions += bonusesAtEoT.actions;
+    permStats.reckless += bonusesAtEoT.reckless;
+    permStats.thorough += bonusesAtEoT.thorough;
+    updatePlayerStatsView();
+    updatePartyStatsView();
+    for(var key in bonusesAtEoT){
+      bonusesAtEoT[key] = 0;
+    }
   }
 
   //print message to game log

@@ -55,13 +55,25 @@ var gameState = {
   shelter: 4,
   tools: 1,
   mat: {
-    common: 2,
-    uncommon: 0,
-    rare: 0
+    common: 20,//start2
+    uncommon: 10,//0
+    rare: 10//0
   },
   recipes: [],
+  created: [],
   allEvents: [],
   allLocations: [],
   allItems: [],
   allRecipes: []
 }
+
+var bonusesAtEoT = {
+      food: 0,
+      shelter: 0,
+      morale: 0,
+      tools: 0,
+      attack: 0,
+      actions: 0,
+      reckless: 0,
+      thorough: 0
+    }
