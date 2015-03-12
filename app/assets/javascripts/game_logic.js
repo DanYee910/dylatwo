@@ -12,6 +12,10 @@ $(document).ready(function() {
   addFindLocHandler('sube', 'suburbs');
   addFindLocHandler('dowe', 'downtown');
   addFindLocHandler('whae', 'wharf');
+  //all buttons show hovering
+  $('button').hover(function(){
+    $(this).toggleClass('buttonhovering')
+  })
   //handler to highlight selected recipe
   $('#my-camp').on('click', '.recipe-row', function(){
     $('.recipe-row').removeClass('selected');
