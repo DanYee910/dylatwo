@@ -39,7 +39,7 @@ $(document).ready(function() {
   //add starting recipes to players available recipes, others to game
   for (var i = 0; i < gameState.allRecipes.length; i++) {
     var startType = gameState.allRecipes[i].starting;
-    if (startType) {
+    if (startType === 'true') {
         gameState.recipes.push(gameState.allRecipes[i]);
     } else {
       gameRecipes.push(gameState.allRecipes[i]);
