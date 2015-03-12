@@ -302,8 +302,9 @@ $(document).ready(function() {
     var rec = gameState.recipes[idx];
     var allreqs = parseMats(rec.materials);
     spendMats(allreqs);
-    //dont get bonus till end of turn
     parseEffects(rec.effect);
+    $('.selected').remove();
+    // alert('Successfully crafted: '+rec.name);
   }
 
   function parseMats(string){
@@ -372,14 +373,15 @@ $(document).ready(function() {
   }
 
   function getEffects(){
-    gameState.food += bonusesAtEoT.food;
-    gameState.shelter += bonusesAtEoT.shelter;
-    gameState.morale += bonusesAtEoT.morale;
-    gameState.tools += bonusesAtEoT.tools;
-    permStats.attack += bonusesAtEoT.attack;
-    permStats.actions += bonusesAtEoT.actions;
-    permStats.reckless += bonusesAtEoT.reckless;
-    permStats.thorough += bonusesAtEoT.thorough;
+    var inGS = ['food', 'shelter', 'morale', 'tools'];
+    var inPS = ['attack', 'actions', 'reckless', 'thorough'];
+    for(var key in inGS){
+      gameState[inGS[key]] += bonusesAtEoT[inGS[key]]
+    }
+    for(var key in inPS){
+      permStats[inPS[key]] += bonusesAtEoT[inPS[key]]
+    }
+
     updatePlayerStatsView();
     updatePartyStatsView();
     for(var key in bonusesAtEoT){
