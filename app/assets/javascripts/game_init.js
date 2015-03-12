@@ -54,6 +54,8 @@ function initGameState(){
   permStats.reckless = 0;
   permStats.thorough = 0;
   refreshPartyStats();
+  //hide button because no selected recipe
+  $('.craft-button').toggle();
 }
 
 function refreshPartyStats(){

@@ -270,7 +270,7 @@ $(document).ready(function() {
     }
   }
 
-  //compare func to sort recipes by name alpabetically
+  //func to sort recipes by name alpabetically
   function sortName(a,b) {
     if (a.name < b.name)
        return -1;
@@ -296,6 +296,20 @@ $(document).ready(function() {
     $('.rec-tools').html(rec.tools);
     $('.rec-mats').html(rec.materials);
     $('.rec-effect').html(rec.effect);
+    if($('.craft-button').css('display') === 'none'){
+      $('.craft-button').toggle();
+    }
+  }
+
+  function zeroSelectedRecipe(){
+    $('.rec-name').html('Nothing');
+    $('.rec-flav').html('Nothing');
+    $('.rec-tools').html(0);
+    $('.rec-mats').html('None');
+    $('.rec-effect').html('None');
+    if($('.craft-button').css('display') === 'inline-block'){
+      $('.craft-button').toggle();
+    }
   }
 
   function craftSelected(idx){
@@ -304,7 +318,8 @@ $(document).ready(function() {
     spendMats(allreqs);
     parseEffects(rec.effect);
     $('.selected').remove();
-    // alert('Successfully crafted: '+rec.name);
+    zeroSelectedRecipe();
+    printLog('Successfully crafted: '+rec.name);
   }
 
   function parseMats(string){
@@ -317,15 +332,15 @@ $(document).ready(function() {
       r: 0
     }
 
-    if(cmatch){
-      reqs.c = parseInt(cmatch[0].slice(-2));
+    function findAnyMatch(strmatch, mat){
+      if(strmatch){
+        reqs[mat] = parseInt(strmatch[0].slice(-2));
+      }
     }
-    if(umatch){
-      reqs.u = parseInt(umatch[0].slice(-2));
-    }
-    if(rmatch){
-      reqs.r = parseInt(rmatch[0].slice(-2));
-    }
+
+    findAnyMatch(cmatch, 'c');
+    findAnyMatch(umatch, 'u');
+    findAnyMatch(rmatch, 'r');
     return reqs;
   }
 
@@ -346,30 +361,21 @@ $(document).ready(function() {
     var rcklssmatch = string.match(/Reckless: (\-|\+)\d/);
     var thrmatch = string.match(/Thorough: (\-|\+)\d/);
 
-    if(foodmatch){
-      bonusesAtEoT.food += parseInt(foodmatch[0].slice(-2));
+    function findAnyMatch(stringmatch, attr){
+      if(stringmatch){
+        bonusesAtEoT[attr] += parseInt(stringmatch[0].slice(-2));
+      }
     }
-    if(shltrmatch){
-      bonusesAtEoT.shelter += parseInt(shltrmatch[0].slice(-2));
-    }
-    if(mrlmatch){
-      bonusesAtEoT.morale += parseInt(mrlmatch[0].slice(-2));
-    }
-    if(toolsmatch){
-      bonusesAtEoT.tools += parseInt(toolsmatch[0].slice(-2));
-    }
-    if(atkmatch){
-      bonusesAtEoT.attack += parseInt(atkmatch[0].slice(-2));
-    }
-    if(actionsmatch){
-      bonusesAtEoT.actions += parseInt(actionsmatch[0].slice(-2));
-    }
-    if(rcklssmatch){
-      bonusesAtEoT.reckless += parseInt(rcklssmatch[0].slice(-2));
-    }
-    if(thrmatch){
-      bonusesAtEoT.thorough += parseInt(thrmatch[0].slice(-2));
-    }
+
+    findAnyMatch(foodmatch, 'food');
+    findAnyMatch(shltrmatch, 'shelter');
+    findAnyMatch(mrlmatch, 'morale');
+    findAnyMatch(toolsmatch, 'tools');
+    findAnyMatch(atkmatch, 'attack');
+    findAnyMatch(actionsmatch, 'actions');
+    findAnyMatch(rcklssmatch, 'reckless');
+    findAnyMatch(thrmatch, 'thorough');
+
   }
 
   function getEffects(){
