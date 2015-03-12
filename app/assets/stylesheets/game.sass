@@ -158,11 +158,34 @@ html
         background-color: $medlight
         border: 2px solid $zgreen
     #current-recipe
+      text-align: center
       width: 400px
       height: 200px
-      background-color: yellow
+      overflow: scroll
+      background-color: $verydark
       display: inline-block
       vertical-align: bottom
+      .rec-flav
+        font-style: italic
+      .current-recipe-table
+        text-align: left
+        width: 90%
+        margin: 0 5% 0 5%
+        background-color: $meddark
+        border: 1px solid red
+        tr td:first-child
+          width: 25%
+          background-color: blue
+        tr td:nth-child(2)
+          background-color: green
+      .craft-button
+        font-size: 16px
+        color: red
+        background-color: yellow
+        border: 2px solid black
+        width: 30%
+        height: 20%
+
   #EoT-button
     display: inline-block
     vertical-align: bottom

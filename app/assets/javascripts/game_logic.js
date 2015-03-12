@@ -14,8 +14,10 @@ $(document).ready(function() {
   addFindLocHandler('whae', 'wharf');
   //handler to highlight selected recipe
   $('#my-camp').on('click', '.recipe-row', function(){
-    $('.recipe-row').removeClass('selected')
-    $(this).toggleClass('selected')
+    $('.recipe-row').removeClass('selected');
+    $(this).toggleClass('selected');
+    var idx = $('.recipe-table tr td').index($('.selected'));
+    showSelectedRecipe(idx);
   })
 
   //remove EoT effects
@@ -270,6 +272,15 @@ $(document).ready(function() {
     }
     //adding handlers for hover selection
     $('.recipe-row').hover(function(){$(this).toggleClass('hovering')})
+  }
+
+  function showSelectedRecipe(idx){
+    var rec = gameState.recipes[idx];
+    console.log(rec.name);
+    $('.rec-name').html(rec.name);
+    $('.rec-flav').html(rec.flavortext);
+    $('.rec-mats').html(rec.materials);
+    $('.rec-effect').html(rec.effect);
   }
 
   //print message to game log
