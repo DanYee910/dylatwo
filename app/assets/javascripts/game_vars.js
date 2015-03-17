@@ -25,7 +25,8 @@ var gameVars = {
 
 //permanent away party stats
 var permStats = {
-  backpack: [],//temp storage from exploring, empty end of turn
+  itemsbackpack: [],
+  recipesbackpack: [],
   attack: 0,
   actions: 0,
   reckless: 0, //+max range zombies encountered

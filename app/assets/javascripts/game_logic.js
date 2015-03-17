@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  //add explore handlers
   addExploreHandler('subq', 'quick', 'suburbs');
   addExploreHandler('subc', 'cautious', 'suburbs');
   addExploreHandler('subf', 'full',  'suburbs');
@@ -118,6 +117,7 @@ $(document).ready(function() {
     $('#'+district+' .fmin').html(locObj.slowmin);
     $('#'+district+' .fmax').html(locObj.slowmax);
     $('#'+district+' .flavtxt').html(locObj.flavortext);
+    printLog(locObj.name+' discovered!');
   }
 
   //show a new Event
@@ -133,14 +133,22 @@ $(document).ready(function() {
     $('#current-event .event-effect').html('End of Turn => '+gameVars.evnt.effect);
   }
 
+  function useAction(num){
+    console.log(untilEndofTurn.actionsLeft);
+    untilEndofTurn.actionsLeft -= num;
+    updatePartyStatsView();
+    console.log(untilEndofTurn.actionsLeft);
+  }
+
   //explore
   function exploreHere(diff, district){
-    //consume 1 action
-    untilEndofTurn.actionsLeft -= 1
-    updatePartyStatsView();
+    useAction(1);
     gameVars.exploreDiff = diff;
     gameVars.district = district;
     var tempDistrictDeck = "";
+
+    //disable buttons
+    $('.explore-button').prop('disabled', true);
 
     //find location
     if(gameVars.district === "suburbs"){
@@ -175,9 +183,8 @@ $(document).ready(function() {
       zmax = gameVars.location.slowmax;
       numRewards = getRandomInt(0,6);
     }
-    //add reckless penalties
+
     zmax += moddedStats.reckless
-    //add thorough bonus
     numRewards += moddedStats.thorough
     // fight with final values
     setTimeout(function(){
@@ -185,7 +192,8 @@ $(document).ready(function() {
     }, 1500);
     setTimeout(function(){
       showNewLocation(district, tempDistrictDeck);
-    }, 2500);
+      $('.explore-button').prop('disabled', false);
+    }, 2600);
   }
 
   //combat
@@ -194,6 +202,7 @@ $(document).ready(function() {
     var z = getRandomInt(min, max);
     z += untilEndofTurn.modZombieStrength;
     //combat
+    printLog('You fight '+z+' zombies with your attack of '+moddedStats.attack);
     if(moddedStats.attack >= z){
       //success, add items to backpack
       printLog('Zombies defeated, found '+num+' items!');
@@ -232,39 +241,38 @@ $(document).ready(function() {
       if(cat === 0){
         var r = gameState.allRecipes[getRandomInt(0,gameState.allRecipes.length - 1)];
         printLog('you found recipe: '+r.name);
-        permStats.backpack.push(r);
+        permStats.recipesbackpack.push(r);
       }
       //get universal items
       else if(cat === 1 || cat === 2){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
         printLog('you found: '+i.name);
-        permStats.backpack.push(i);
+        permStats.itemsbackpack.push(i);
       }
       //get district items
       else if(cat === 3 || cat === 4){
         var i = here[getRandomInt(0,here.length - 1)];
         printLog('you found: '+i.name);
-        permStats.backpack.push(i);
+        permStats.itemsbackpack.push(i);
       }
       //get other 2 district items
       else if(cat === 5) {
         var i = there1[getRandomInt(0,there1.length - 1)];
         printLog('you found: '+i.name);
-        permStats.backpack.push(i);
+        permStats.itemsbackpack.push(i);
       }
       else if(cat === 6){
         var i = there2[getRandomInt(0,there2.length - 1)];
         printLog('you found: '+i.name);
-        permStats.backpack.push(i);
+        permStats.itemsbackpack.push(i);
       }
     }
-    console.log(permStats.backpack);
+    console.log(permStats.itemsbackpack);
+    console.log(permStats.recipesbackpack);
   }
 
   function findNewLoc(district){
-    //consume 1 action
-    untilEndofTurn.actionsLeft -= 1
-    updatePartyStatsView();
+    useAction(1);
     //get new location
     if(district === "suburbs"){
       showNewLocation("suburbs", allSuburbs);
@@ -416,6 +424,7 @@ $(document).ready(function() {
   //******* BEGIN GAME *********
   //initialize game stats and stat views
   initGameState();
+  refreshPartyStats();
   updatePlayerStatsView();
   updatePartyStatsView();
   //deal starting 3 locations
