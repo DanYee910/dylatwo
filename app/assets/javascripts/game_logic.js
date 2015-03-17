@@ -81,7 +81,6 @@ $(document).ready(function() {
   }
   //update away party stats
   function updatePartyStatsView(){
-    refreshPartyStats();
     $('#party-attack').html(moddedStats.attack);
     $('#party-actions').html(untilEndofTurn.actionsLeft);
     $('#party-reckless').html(moddedStats.reckless);
@@ -134,10 +133,8 @@ $(document).ready(function() {
   }
 
   function useAction(num){
-    console.log(untilEndofTurn.actionsLeft);
     untilEndofTurn.actionsLeft -= num;
     updatePartyStatsView();
-    console.log(untilEndofTurn.actionsLeft);
   }
 
   //explore
@@ -424,7 +421,6 @@ $(document).ready(function() {
   //******* BEGIN GAME *********
   //initialize game stats and stat views
   initGameState();
-  refreshPartyStats();
   updatePlayerStatsView();
   updatePartyStatsView();
   //deal starting 3 locations
