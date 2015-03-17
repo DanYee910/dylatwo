@@ -32,6 +32,8 @@ $(document).ready(function() {
     getItemsandRecipes();
     clearEndofTurn();
     getEffects();
+    gameState.turns += 1;
+    updatePlayerStatsView();
     showAvailRecipes();
   })
 
@@ -453,12 +455,10 @@ $(document).ready(function() {
   refreshPartyStats();
   updatePlayerStatsView();
   updatePartyStatsView();
-  //deal starting 3 locations
+
   showNewLocation("suburbs", allSuburbs);
   showNewLocation("downtown", allDowntown);
   showNewLocation("wharf", allWharf);
-  //get an event
   newEvent();
-  //show recipes
   showAvailRecipes();
 })

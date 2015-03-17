@@ -50,7 +50,7 @@ var moddedStats = {
 }
 
 var gameState = {
-  turns: 0,
+  turns: 1,
   food: 4,
   morale: 4,
   shelter: 4,
