@@ -76,5 +76,8 @@ var bonusesAtEoT = {
       attack: 0,
       actions: 0,
       reckless: 0,
-      thorough: 0
+      thorough: 0,
+      common: 0,
+      uncommon: 0,
+      rare: 0
     }

@@ -29,8 +29,10 @@ $(document).ready(function() {
   })
   //end of turn button handler
   $('#end-turn').on('click',function(){
+    getItemsandRecipes();
     clearEndofTurn();
     getEffects();
+    showAvailRecipes();
   })
 
   //remove EoT effects
@@ -186,11 +188,11 @@ $(document).ready(function() {
     // fight with final values
     setTimeout(function(){
       fightZombies(zmin, zmax, numRewards)
-    }, 1500);
+    }, 1000);
     setTimeout(function(){
       showNewLocation(district, tempDistrictDeck);
       $('.explore-button').prop('disabled', false);
-    }, 2600);
+    }, 2100);
   }
 
   //combat
@@ -236,7 +238,7 @@ $(document).ready(function() {
       var cat = getRandomInt(0,6);
       //get recipes
       if(cat === 0){
-        var r = gameState.allRecipes[getRandomInt(0,gameState.allRecipes.length - 1)];
+        var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
         printLog('you found recipe: '+r.name);
         permStats.recipesbackpack.push(r);
       }
@@ -264,8 +266,24 @@ $(document).ready(function() {
         permStats.itemsbackpack.push(i);
       }
     }
-    console.log(permStats.itemsbackpack);
-    console.log(permStats.recipesbackpack);
+  }
+
+  function getItemsandRecipes(){
+    //move recipes to camp list
+    for (var i = 0; i < permStats.recipesbackpack.length; i++) {
+      gameState.recipes.push(permStats.recipesbackpack[i])
+    }
+    permStats.recipesbackpack = [];
+    //stack item bonuses
+    for (var i = 0; i < permStats.itemsbackpack.length; i++) {
+      printLog('Obtained '+permStats.itemsbackpack[i].name+', gained '+permStats.itemsbackpack[i].effect+'!');
+      parseEffects(permStats.itemsbackpack[i].effect);
+    }
+    permStats.itemsbackpack = [];
+    // console.log(permStats.recipesbackpack);
+    // console.log(gameState.recipes);
+    // console.log(permStats.itemsbackpack);
+    // console.log(bonusesAtEoT);
   }
 
   function findNewLoc(district){
@@ -295,6 +313,7 @@ $(document).ready(function() {
 
   //add available recipes to view
   function showAvailRecipes(){
+    $('.recipe-row').parent().remove();
     gameState.recipes.sort(sortName);
     for (var i = 0; i < gameState.recipes.length; i++) {
       $('.recipe-table').append('<tr><td class="recipe-row">'+gameState.recipes[i].name+'</td></tr>')
@@ -374,6 +393,9 @@ $(document).ready(function() {
     var actionsmatch = string.match(/Actions: (\-|\+)\d/);
     var rcklssmatch = string.match(/Reckless: (\-|\+)\d/);
     var thrmatch = string.match(/Thorough: (\-|\+)\d/);
+    var cmatch = string.match(/Common Material: (\-|\+)\d/);
+    var umatch = string.match(/Uncommon Material: (\-|\+)\d/);
+    var rmatch = string.match(/Rare Material: (\-|\+)\d/);
 
     function findAnyMatch(stringmatch, attr){
       if(stringmatch){
@@ -389,17 +411,23 @@ $(document).ready(function() {
     findAnyMatch(actionsmatch, 'actions');
     findAnyMatch(rcklssmatch, 'reckless');
     findAnyMatch(thrmatch, 'thorough');
-
+    findAnyMatch(cmatch, 'common');
+    findAnyMatch(umatch, 'uncommon');
+    findAnyMatch(rmatch, 'rare');
   }
 
   function getEffects(){
     var inGS = ['food', 'shelter', 'morale', 'tools'];
     var inPS = ['attack', 'actions', 'reckless', 'thorough'];
+    var inMats = ['common', 'uncommon', 'rare'];
     for(var key in inGS){
       gameState[inGS[key]] += bonusesAtEoT[inGS[key]]
     }
     for(var key in inPS){
       permStats[inPS[key]] += bonusesAtEoT[inPS[key]]
+    }
+    for(var key in inMats){
+      gameState.mat[inPS[key]] += bonusesAtEoT[inPS[key]]
     }
 
     updatePlayerStatsView();
@@ -421,6 +449,7 @@ $(document).ready(function() {
   //******* BEGIN GAME *********
   //initialize game stats and stat views
   initGameState();
+  refreshPartyStats();
   updatePlayerStatsView();
   updatePartyStatsView();
   //deal starting 3 locations
