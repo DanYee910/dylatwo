@@ -140,16 +140,20 @@ $(document).ready(function() {
     updatePartyStatsView();
     gameVars.exploreDiff = diff;
     gameVars.district = district;
+    var tempDistrictDeck = "";
 
     //find location
     if(gameVars.district === "suburbs"){
       gameVars.location = gameVars.suburbs;
+      tempDistrictDeck = allSuburbs;
     }
     else if(gameVars.district === "downtown"){
       gameVars.location = gameVars.downtown;
+      tempDistrictDeck = allDowntown;
     }
     else {
       gameVars.location = gameVars.wharf;
+      tempDistrictDeck = allWharf;
     }
     printLog('Searching '+gameVars.location.name+'...');
 
@@ -176,7 +180,12 @@ $(document).ready(function() {
     //add thorough bonus
     numRewards += moddedStats.thorough
     // fight with final values
-    setTimeout(function(){fightZombies(zmin, zmax, numRewards)}, 1500);
+    setTimeout(function(){
+      fightZombies(zmin, zmax, numRewards)
+    }, 1500);
+    setTimeout(function(){
+      showNewLocation(district, tempDistrictDeck);
+    }, 2500);
   }
 
   //combat
