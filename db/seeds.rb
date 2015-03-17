@@ -1,7 +1,7 @@
 # event definitions
 events = [
   {name: 'Food spoilage', effect: 'Food: -2', flavortext: 'need more refrigerators', imgtag: 'none'},
-  {name: 'Fix the barricades', effect: 'Shelter: -1, Common Materials: -2, Recipe: minor repairs', flavortext: "it's getting old and falling apart",imgtag: 'none'},
+  {name: 'Fix the barricades', effect: 'Shelter: -1, Common Material: -2, Recipe: minor repairs', flavortext: "it's getting old and falling apart",imgtag: 'none'},
   {name: 'Clear and sunny skies', effect: 'Morale: +1, Food: -1', flavortext: 'a sign of good things to come?', imgtag: 'none'},
   {name: 'Roaches', effect: 'Food: -2',flavortext: 'kill them with fire!',imgtag: 'none'},
   {name: 'A Birthday!', effect: 'Food: -2, Morale: +1',flavortext: 'Celebrate life while you still have one.',imgtag: 'none'},
@@ -36,7 +36,7 @@ items = [
   {name:'Canned Seafood',spawnarea:'Wharf',effect:'Food: +1',flavortext:"Not the freshest but edible",imgtag:'none'},
   {name:'Binoculars',spawnarea:'Wharf',effect:'Thorough: +1',flavortext:"Crisp and clear vision",imgtag:'none'},
   {name:'Matress',spawnarea:'Suburbs',effect:'Shelter: +1',flavortext:"A used matress, what could possibly go wrong?",imgtag:'none'},
-  {name:'Camera',spawnarea:'Wharf',effect:'Common Materials: +1',flavortext:"Worthless junk...",imgtag:'none'},
+  {name:'Camera',spawnarea:'Wharf',effect:'Common Material: +1',flavortext:"Worthless junk...",imgtag:'none'},
   {name:'Herbs and Spices',spawnarea:'Wharf',effect:'Morale: +1',flavortext:"Makes all this crap food more palatable",imgtag:'none'},
   {name:'Food Stash',spawnarea:'All',effect:'Food: +3',flavortext:"Whoever was here left in a hurry.",imgtag:'none'},
   {name:'Emergency Kit',spawnarea:'All',effect:'Morale: +2',flavortext:"antiseptics, bandages, flares...",imgtag:'none'},

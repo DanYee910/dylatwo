@@ -271,6 +271,7 @@ $(document).ready(function() {
   function getItemsandRecipes(){
     //move recipes to camp list
     for (var i = 0; i < permStats.recipesbackpack.length; i++) {
+      printLog('New recipe available: '+permStats.recipesbackpack[i].name);
       gameState.recipes.push(permStats.recipesbackpack[i])
     }
     permStats.recipesbackpack = [];
@@ -417,6 +418,7 @@ $(document).ready(function() {
   }
 
   function getEffects(){
+    console.log(bonusesAtEoT);
     var inGS = ['food', 'shelter', 'morale', 'tools'];
     var inPS = ['attack', 'actions', 'reckless', 'thorough'];
     var inMats = ['common', 'uncommon', 'rare'];
@@ -429,7 +431,7 @@ $(document).ready(function() {
     for(var key in inMats){
       gameState.mat[inPS[key]] += bonusesAtEoT[inPS[key]]
     }
-
+    refreshPartyStats();
     updatePlayerStatsView();
     updatePartyStatsView();
     for(var key in bonusesAtEoT){
