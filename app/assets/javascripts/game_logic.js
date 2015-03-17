@@ -418,7 +418,6 @@ $(document).ready(function() {
   }
 
   function getEffects(){
-    console.log(bonusesAtEoT);
     var inGS = ['food', 'shelter', 'morale', 'tools'];
     var inPS = ['attack', 'actions', 'reckless', 'thorough'];
     var inMats = ['common', 'uncommon', 'rare'];
@@ -429,7 +428,7 @@ $(document).ready(function() {
       permStats[inPS[key]] += bonusesAtEoT[inPS[key]]
     }
     for(var key in inMats){
-      gameState.mat[inPS[key]] += bonusesAtEoT[inPS[key]]
+      gameState.mat[inMats[key]] += bonusesAtEoT[inMats[key]]
     }
     refreshPartyStats();
     updatePlayerStatsView();
