@@ -41,6 +41,7 @@ $(document).ready(function() {
   })
   //end of turn button handler
   $('#end-turn').on('click',function(){
+    printLog('Day '+gameState.turns+' is over.');
     getItemsandRecipes();
     clearEndofTurn();
     getEffects();
@@ -295,6 +296,12 @@ $(document).ready(function() {
       parseEffects(permStats.itemsbackpack[i].effect);
     }
     permStats.itemsbackpack = [];
+    //get created recipes
+    for (var i = 0; i < gameState.created.length; i++) {
+      printLog('Fixed '+gameState.created[i].name+', gained '+gameState.created[i].effect+'!');
+      parseEffects(gameState.created[i].effect);
+    }
+    gameState.created = [];
     // console.log(permStats.recipesbackpack);
     // console.log(gameState.recipes);
     // console.log(permStats.itemsbackpack);
@@ -364,8 +371,9 @@ $(document).ready(function() {
     var rec = gameState.recipes[idx];
     var allreqs = parseMats(rec.materials);
     spendMats(allreqs);
-    parseEffects(rec.effect);
-    $('.selected').remove();
+    gameState.created.push(rec);
+    $('.selected').parent().remove();
+    gameState.recipes.splice(idx, 1);
     zeroSelectedRecipe();
     printLog('Successfully crafted: '+rec.name);
   }
