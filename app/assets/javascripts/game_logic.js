@@ -298,7 +298,8 @@ $(document).ready(function() {
     permStats.itemsbackpack = [];
     //get created recipes
     for (var i = 0; i < gameState.created.length; i++) {
-      printLog('Fixed '+gameState.created[i].name+', gained '+gameState.created[i].effect+'!');
+      printLog('Created '+gameState.created[i].name+', gained '+gameState.created[i].effect+'!');
+      $('#all-items').append('<div class="item-box">'+gameState.created[i].name+'</div>');
       parseEffects(gameState.created[i].effect);
     }
     gameState.created = [];
