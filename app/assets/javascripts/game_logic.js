@@ -463,6 +463,7 @@ $(document).ready(function() {
 
   //******* BEGIN GAME *********
   //initialize game stats and stat views
+  $('#all-items').hide();
   initGameState();
   refreshPartyStats();
   updateSidebar();
