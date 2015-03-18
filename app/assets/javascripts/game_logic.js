@@ -22,6 +22,18 @@ $(document).ready(function() {
     var idx = $('.recipe-table tr td').index($('.selected'));
     showSelectedRecipe(idx);
   })
+  //handler for tab switching
+  $('.home-tab').on('click', function(){
+    $('.home-tab').attr('class', 'home-tab tab-inactive');
+    $(this).attr('class','home-tab tab-active');
+    if($('#recipes-tab').attr('class') === 'home-tab tab-active'){
+      $('#open-recipes').show();
+      $('#all-items').hide();
+    } else {
+      $('#open-recipes').hide();
+      $('#all-items').show();
+    }
+  })
   //handler to craft
   $('.craft-button').on('click', function(){
     var idx = $('.recipe-table tr td').index($('.selected'));
@@ -33,7 +45,7 @@ $(document).ready(function() {
     clearEndofTurn();
     getEffects();
     gameState.turns += 1;
-    updatePlayerStatsView();
+    updateSidebar();
     showAvailRecipes();
   })
 
@@ -73,7 +85,7 @@ $(document).ready(function() {
       return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   //update the stats sidebar view with current player values
-  function updatePlayerStatsView(){
+  function updateSidebar(){
     $('#sidebar-turns').html(gameState.turns);
     $('#sidebar-food').html(gameState.food);
     $('#sidebar-morale').html(gameState.morale);
@@ -384,7 +396,7 @@ $(document).ready(function() {
     gameState.mat.common += matreqs.c;
     gameState.mat.uncommon += matreqs.u;
     gameState.mat.rare += matreqs.r;
-    updatePlayerStatsView();
+    updateSidebar();
   }
 
   function parseEffects(string){
@@ -433,7 +445,7 @@ $(document).ready(function() {
       gameState.mat[inMats[key]] += bonusesAtEoT[inMats[key]]
     }
     refreshPartyStats();
-    updatePlayerStatsView();
+    updateSidebar();
     updatePartyStatsView();
     for(var key in bonusesAtEoT){
       bonusesAtEoT[key] = 0;
@@ -453,7 +465,7 @@ $(document).ready(function() {
   //initialize game stats and stat views
   initGameState();
   refreshPartyStats();
-  updatePlayerStatsView();
+  updateSidebar();
   updatePartyStatsView();
 
   showNewLocation("suburbs", allSuburbs);
