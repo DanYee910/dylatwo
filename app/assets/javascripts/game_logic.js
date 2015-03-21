@@ -185,6 +185,8 @@ $(document).ready(function() {
     else if(str === 'ueotatk'){
       untilEndofTurn.modAttack += val;
     }
+    refreshPartyStats();
+    updatePartyStatsView();
   }
 
   function useAction(num){
