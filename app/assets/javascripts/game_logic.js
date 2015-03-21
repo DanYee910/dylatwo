@@ -411,12 +411,13 @@ $(document).ready(function() {
   function craftSelected(idx){
     var rec = gameState.recipes[idx];
     var allreqs = parseMats(rec.materials);
-    spendMats(allreqs);
-    gameState.created.push(rec);
-    $('.selected').parent().remove();
-    gameState.recipes.splice(idx, 1);
-    zeroSelectedRecipe();
-    printLog('Successfully crafted: '+rec.name);
+    if(spendMats(allreqs) === true){
+      gameState.created.push(rec);
+      $('.selected').parent().remove();
+      gameState.recipes.splice(idx, 1);
+      zeroSelectedRecipe();
+      printLog('Successfully crafted: '+rec.name);
+    }
   }
 
   function parseMats(string){
@@ -442,10 +443,28 @@ $(document).ready(function() {
   }
 
   function spendMats(matreqs){
-    gameState.mat.common += matreqs.c;
-    gameState.mat.uncommon += matreqs.u;
-    gameState.mat.rare += matreqs.r;
-    updateSidebar();
+    var enoughMats = true;
+
+    if(gameState.mat.common < Math.abs(matreqs.c)){
+      printLog('Not enough Common Materials.');
+      enoughMats = false;
+    }
+    if(gameState.mat.uncommon < Math.abs(matreqs.u)){
+      printLog('Not enough Uncommon Materials.');
+      enoughMats = false;
+    }
+    if(gameState.mat.rare < Math.abs(matreqs.r)){
+      printLog('Not enough Rare Materials.');
+      enoughMats = false;
+    }
+
+    if(enoughMats === true){
+      gameState.mat.common += matreqs.c;
+      gameState.mat.uncommon += matreqs.u;
+      gameState.mat.rare += matreqs.r;
+      updateSidebar();
+    }
+    return enoughMats;
   }
 
   function parseEffects(string){

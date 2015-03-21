@@ -56,9 +56,9 @@ var gameState = {
   shelter: 4,
   tools: 1,
   mat: {
-    common: 20,//start2
-    uncommon: 10,//0
-    rare: 10//0
+    common: 2,//start2
+    uncommon: 1,//0
+    rare: 1//0
   },
   recipes: [],
   created: [],
