@@ -18,7 +18,11 @@ ActiveRecord::Schema.define(version: 20150304042711) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.string   "effect"
+    t.string   "effecttext"
+    t.string   "effect1"
+    t.integer  "val1"
+    t.string   "effect2"
+    t.integer  "val2"
     t.text     "flavortext"
     t.text     "imgtag"
     t.datetime "created_at", null: false

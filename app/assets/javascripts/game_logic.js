@@ -150,7 +150,7 @@ $(document).ready(function() {
 
     $('#current-event .event-name').html('Event: ' + gameVars.evnt.name);
     $('#current-event .event-txt').html(gameVars.evnt.flavortext);
-    $('#current-event .event-effect').html('End of Turn => '+gameVars.evnt.effect);
+    $('#current-event .event-effect').html(gameVars.evnt.effecttext);
   }
 
   function useAction(num){

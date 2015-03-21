@@ -1,14 +1,13 @@
-# event definitions
 events = [
-  {name: 'Food spoilage', effect: 'Food: -2', flavortext: 'need more refrigerators', imgtag: 'none'},
-  {name: 'Fix the barricades', effect: 'Shelter: -1, Common Material: -2, Recipe: minor repairs', flavortext: "it's getting old and falling apart",imgtag: 'none'},
-  {name: 'Clear and sunny skies', effect: 'Morale: +1, Food: -1', flavortext: 'a sign of good things to come?', imgtag: 'none'},
-  {name: 'Roaches', effect: 'Food: -2',flavortext: 'kill them with fire!',imgtag: 'none'},
-  {name: 'A Birthday!', effect: 'Food: -2, Morale: +1',flavortext: 'Celebrate life while you still have one.',imgtag: 'none'},
-  {name: 'Bum batteries', effect: 'Shelter: -1, Food: -1',flavortext: 'No wonder this refrigerated food tastes so bad.',imgtag: 'none'},
-  {name: 'A thief!', effect: 'Food: -2, Rare Material: -1',flavortext: 'Who did it?!.',imgtag: 'none'}
+  {name: 'Food spoilage', effecttext: 'At end of turn, Food: -2', effect1: 'eotfood', val1: -2, flavortext: 'need more refrigerators', imgtag: 'none'},
+  {name: 'Fix the barricades', effecttext: 'At end of turn, Shelter: -1, Common Materials -2', effect1: 'eotshel', val1: -1, effect2: 'eotcmat', val2: -2, flavortext: "it's getting old and falling apart",imgtag: 'none'},
+  {name: 'Clear and sunny skies', effecttext: 'At end of turn, Morale: +1, Food: -1', effect1: 'eotmor', val1: 1, effect2: 'eotfood', val2: -1, flavortext: 'a sign of good things to come?', imgtag: 'none'},
+  {name: 'Roaches', effecttext: 'At end of turn, Food: -2', effect1: 'eotfood', val1: -2, flavortext: 'kill them with fire!',imgtag: 'none'},
+  {name: 'A Birthday!', effecttext: 'At end of turn, Food: -2, Morale: +1', effect1: 'eotfood', val1: -2, effect2: 'eotmor', val2: 1, flavortext: 'Celebrate life while you still have one.',imgtag: 'none'},
+  {name: 'Bum batteries', effecttext: 'At end of turn, Shelter: -1, Food: -1', effect1: 'eotshel', val1: -1, effect2: 'eotfood', val2: -1, flavortext: 'No wonder this refrigerated food tastes so bad.',imgtag: 'none'},
+  {name: 'A thief!', effecttext: 'At end of turn, Food: -2, Rare Material: -1', effect1: 'eotfood', val1: -2, effect2: 'eotrmat', val2: -1, flavortext: 'Who did it?!.',imgtag: 'none'}
 ]
-# location definitions
+
 locations = [
   {name: 'Gas Station', district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'gas is long gone, might be a screwdriver somewhere',imgtag:'none'},
   {name: 'Medical Office', district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'seems quiet, some bandages would be nice.',imgtag:'none'},
@@ -24,7 +23,7 @@ locations = [
   {name:'Bank',district:'Wharf',fastmin:0, fastmax:1, medmin:0, medmax:2, slowmin:0, slowmax:3, flavortext:'Locked up tight, but theres an open window.'},
   {name:'Yacht',district:'Wharf',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Where is the owner?',imgtag:'none'}
 ]
-# item definitions
+
 items = [
   {name:'Hammer',spawnarea:'All',effect:'Tools: +1',flavortext:'About time one of these showed up',imgtag:'none'},
   {name:'Soap and Detergent',spawnarea:'All',effect:'Morale: +1',flavortext:'Helps get rid of the smell.',imgtag:'none'},
@@ -46,7 +45,6 @@ items = [
   {name:'Roll of Duct Tape',spawnarea:'Downtown',effect:'Tools: +1',flavortext:"Tape for everything",imgtag:'none'}
 ]
 
-# recipes definitions
 recipes = [
   {name:'Bicycle', starting:'false',tools:2, materials:'Common Material: -2, Uncommon Material: -1', effect: 'Actions: +1', flavortext:'Quiet and efficient transportation, no gas required.'},
   {name:'Improvised Mortar', starting:'false',tools:3, materials:'Uncommon Material: -3, Rare Material: -2', effect: 'Attack: +2', flavortext:'Loud and destructive, makes a great diversion.'},
@@ -65,7 +63,11 @@ recipes = [
 events.each do |ev|
   Event.create(
     name: ev[:name],
-    effect: ev[:effect],
+    effecttext: ev[:effecttext],
+    effect1: ev[:effect1],
+    val1: ev[:val1],
+    effect2: ev[:effect2],
+    val2: ev[:val2],
     flavortext: ev[:flavortext],
     imgtag: ev[:imgtag])
 end
