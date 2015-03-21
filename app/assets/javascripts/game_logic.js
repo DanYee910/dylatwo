@@ -15,6 +15,10 @@ $(document).ready(function() {
   $('button').hover(function(){
     $(this).toggleClass('buttonhovering')
   })
+  //rules
+  $('.start-button').on('click', function(){
+    $('#rules').toggle();
+  });
   //handler to highlight selected recipe
   $('#my-camp').on('click', '.recipe-row', function(){
     $('.recipe-row').removeClass('selected');
