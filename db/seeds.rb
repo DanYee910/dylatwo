@@ -5,7 +5,10 @@ events = [
   {name: 'Roaches', effecttext: 'At end of turn, Food: -2', effect1: 'eotfood', val1: -2, flavortext: 'kill them with fire!',imgtag: 'none'},
   {name: 'A Birthday!', effecttext: 'At end of turn, Food: -2, Morale: +1', effect1: 'eotfood', val1: -2, effect2: 'eotmor', val2: 1, flavortext: 'Celebrate life while you still have one.',imgtag: 'none'},
   {name: 'Bum batteries', effecttext: 'At end of turn, Shelter: -1, Food: -1', effect1: 'eotshel', val1: -1, effect2: 'eotfood', val2: -1, flavortext: 'No wonder this refrigerated food tastes so bad.',imgtag: 'none'},
-  {name: 'A thief!', effecttext: 'At end of turn, Food: -2, Rare Material: -1', effect1: 'eotfood', val1: -2, effect2: 'eotrmat', val2: -1, flavortext: 'Who did it?!.',imgtag: 'none'}
+  {name: 'A thief!', effecttext: 'At end of turn, Food: -2, Rare Material: -1', effect1: 'eotfood', val1: -2, effect2: 'eotrmat', val2: -1, flavortext: 'Who did it?!.',imgtag: 'none'},
+  {name: 'Desperation', effecttext: 'For this turn, Reckless: +2, Thorough: +2', effect1: 'ueotreck', val1: +2, effect2: 'ueottho', val2: +2, flavortext: 'Time to do something really stupid...',imgtag: 'none'},
+  {name: 'Found Ammo Stash', effecttext: 'For this turn, Reckless: +2, Attack: +2', effect1: 'ueotreck', val1: +2, effect2: 'ueotatk', val2: +2, flavortext: 'Guaranteed to attract attention, but so what?',imgtag: 'none'},
+  {name: 'Too much alcohol', effecttext: 'For this turn, Reckless: +3', effect1: 'ueotreck', val1: +3, flavortext: 'Next time save the booze for the people not leaving camp.',imgtag: 'none'}
 ]
 
 locations = [

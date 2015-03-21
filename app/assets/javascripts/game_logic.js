@@ -176,6 +176,15 @@ $(document).ready(function() {
     else if(str === 'eotrmat'){
       bonusesAtEoT.rare += val;
     }
+    else if(str === 'ueotreck'){
+      untilEndofTurn.modReckless += val;
+    }
+    else if(str === 'ueottho'){
+      untilEndofTurn.modThorough += val;
+    }
+    else if(str === 'ueotatk'){
+      untilEndofTurn.modAttack += val;
+    }
   }
 
   function useAction(num){
@@ -502,6 +511,7 @@ $(document).ready(function() {
   //******* BEGIN GAME *********
   //initialize game stats and stat views
   $('#all-items').hide();
+  $('#rules').toggle();
   initGameState();
   refreshPartyStats();
   updateSidebar();
