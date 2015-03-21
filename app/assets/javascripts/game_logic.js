@@ -50,6 +50,7 @@ $(document).ready(function() {
     clearEndofTurn();
     getEffects();
     gameState.turns += 1;
+    newEvent();
     updateSidebar();
     showAvailRecipes();
   })
@@ -151,6 +152,30 @@ $(document).ready(function() {
     $('#current-event .event-name').html('Event: ' + gameVars.evnt.name);
     $('#current-event .event-txt').html(gameVars.evnt.flavortext);
     $('#current-event .event-effect').html(gameVars.evnt.effecttext);
+
+    parseEvent(gameVars.evnt.effect1,gameVars.evnt.val1);
+    parseEvent(gameVars.evnt.effect2,gameVars.evnt.val2);
+  }
+
+  function parseEvent(str, val){
+    if(str === 'eotfood'){
+      bonusesAtEoT.food += val;
+    }
+    else if(str === 'eotshel'){
+      bonusesAtEoT.shelter += val;
+    }
+    else if(str === 'eotmor'){
+      bonusesAtEoT.morale += val;
+    }
+    else if(str === 'eotcmat'){
+      bonusesAtEoT.common += val;
+    }
+    else if(str === 'eotumat'){
+      bonusesAtEoT.uncommon += val;
+    }
+    else if(str === 'eotrmat'){
+      bonusesAtEoT.rare += val;
+    }
   }
 
   function useAction(num){
