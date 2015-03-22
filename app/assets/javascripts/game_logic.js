@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  //rules
+  $('.start-button').on('click', function(){
+    $('#rules').toggle();
+  });
+
   addExploreHandler('subq', 'quick', 'suburbs');
   addExploreHandler('subc', 'cautious', 'suburbs');
   addExploreHandler('subf', 'full',  'suburbs');
@@ -15,11 +20,7 @@ $(document).ready(function() {
   $('button').hover(function(){
     $(this).toggleClass('buttonhovering')
   })
-  //rules
-  $('.start-button').on('click', function(){
-    $('#rules').toggle();
-  });
-  //handler to highlight selected recipe
+  //handler to highlight and show selected recipe
   $('#my-camp').on('click', '.recipe-row', function(){
     $('.recipe-row').removeClass('selected');
     $(this).toggleClass('selected');
@@ -86,11 +87,10 @@ $(document).ready(function() {
     });
   }
 
-  //random int function
   function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  //update the stats sidebar view with current player values
+
   function updateSidebar(){
     $('#sidebar-turns').html(gameState.turns);
     $('#sidebar-food').html(gameState.food);
@@ -143,7 +143,6 @@ $(document).ready(function() {
 
   //show a new Event
   function newEvent(){
-    //get random event
     var min = 0
     var max = gameState.allEvents.length - 1
     var idx = getRandomInt(min, max)
@@ -256,14 +255,13 @@ $(document).ready(function() {
     var z = getRandomInt(min, max);
     z += untilEndofTurn.modZombieStrength;
     //combat
-    printLog('You fight '+z+' zombies with your attack of '+moddedStats.attack);
+    printLog('You fight '+z+' zombie(s) with your attack of '+moddedStats.attack);
     if(moddedStats.attack >= z){
       //success, add items to backpack
       printLog('Zombies defeated, found '+num+' items!');
       setTimeout(function(){findItems(gameVars.district, num)}, 1000);
     }
     else{
-      //fail, get nothing
       printLog('Too many zombies, you run for your life emptyhanded.');
     }
   }
@@ -343,15 +341,11 @@ $(document).ready(function() {
       parseEffects(gameState.created[i].effect);
     }
     gameState.created = [];
-    // console.log(permStats.recipesbackpack);
-    // console.log(gameState.recipes);
-    // console.log(permStats.itemsbackpack);
-    // console.log(bonusesAtEoT);
   }
 
   function findNewLoc(district){
     useAction(1);
-    //get new location
+
     if(district === "suburbs"){
       showNewLocation("suburbs", allSuburbs);
       printLog('Found a new place in the suburbs.');
@@ -365,7 +359,7 @@ $(document).ready(function() {
     }
   }
 
-  //func to sort recipes by name alpabetically
+  //func to sort by name alpabetically
   function sortName(a,b) {
     if (a.name < b.name)
        return -1;
