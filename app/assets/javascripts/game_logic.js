@@ -129,7 +129,7 @@ $(document).ready(function() {
     }
 
     //update correct view with this location
-    // $('#'+district+' .locationimg').attr('src', locObj.imgtag);
+    $('#'+district+' .location-img').attr('src', '/assets/'+locObj.imgtag);
     $('#'+district+' .loc-name').html(locObj.name);
     $('#'+district+' .qmin').html(locObj.fastmin);
     $('#'+district+' .qmax').html(locObj.fastmax);

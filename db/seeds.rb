@@ -12,19 +12,19 @@ events = [
 ]
 
 locations = [
-  {name: 'Gas Station', district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'gas is long gone, might be a screwdriver somewhere',imgtag:'none'},
-  {name: 'Medical Office', district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'seems quiet, some bandages would be nice.',imgtag:'none'},
-  {name: 'Candle Shop',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Quiet, but is there anything in here?',imgtag:'none'},
-  {name: 'Small House',district:'Suburbs',fastmin:0, fastmax:1, medmin:0, medmax:2, slowmin:1, slowmax:3, flavortext:'Seems safe to look inside.',imgtag:'none'},
-  {name: 'Fire Station',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Might find some emergency supplies.',imgtag:'none'},
-  {name:'Seafood Restaurant',district:'Wharf',fastmin:1, fastmax:2, medmin:2, medmax:4, slowmin:3, slowmax:6, flavortext:'big place, lots of zombies...',imgtag:'none'},
-  {name:'Bakery',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:3, slowmin:2, slowmax:4, flavortext:'the smell of baked bread used to linger here',imgtag:'none'},
-  {name:'Coffee Shop',district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:3, slowmin:2, slowmax:4, flavortext:'Could be some coffee beans somewhere',imgtag:'none'},
-  {name:'Police Station',district:'Downtown',fastmin:0, fastmax:1, medmin:2, medmax:3, slowmin:3, slowmax:5, flavortext:'This is not a refuge...',imgtag:'none'},
-  {name:'Fine Art Museum',district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'Blood stains the walls, but you see nothing.',imgtag:'none'},
-  {name:'Warehouse',district:'Wharf',fastmin:0, fastmax:1, medmin:2, medmax:3, slowmin:2, slowmax:5, flavortext:'Some shipping containers still lying around.',imgtag:'none'},
-  {name:'Bank',district:'Wharf',fastmin:0, fastmax:1, medmin:0, medmax:2, slowmin:0, slowmax:3, flavortext:'Locked up tight, but theres an open window.'},
-  {name:'Yacht',district:'Wharf',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Where is the owner?',imgtag:'none'}
+  {name: 'Gas Station', district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'gas is long gone, might be a screwdriver somewhere',imgtag:'gasstation.jpg'},
+  {name: 'Medical Office', district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'seems quiet, some bandages would be nice.',imgtag:'medbuilding.jpg'},
+  {name: 'Candle Shop',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Quiet, but is there anything in here?',imgtag:'candleshop.jpg'},
+  {name: 'Small House',district:'Suburbs',fastmin:0, fastmax:1, medmin:0, medmax:2, slowmin:1, slowmax:3, flavortext:'Seems safe to look inside.',imgtag:'smallhouse.jpg'},
+  {name: 'Fire Station',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Might find some emergency supplies.',imgtag:'firestation.jpg'},
+  {name:'Seafood Restaurant',district:'Wharf',fastmin:1, fastmax:2, medmin:2, medmax:4, slowmin:3, slowmax:6, flavortext:'big place, lots of zombies...',imgtag:'restaurant.jpg'},
+  {name:'Bakery',district:'Suburbs',fastmin:0, fastmax:1, medmin:1, medmax:3, slowmin:2, slowmax:4, flavortext:'the smell of baked bread used to linger here',imgtag:'candleshop.jpg'},
+  {name:'Coffee Shop',district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:3, slowmin:2, slowmax:4, flavortext:'Could be some coffee beans somewhere',imgtag:'candleshop.jpg'},
+  {name:'Police Station',district:'Downtown',fastmin:0, fastmax:1, medmin:2, medmax:3, slowmin:3, slowmax:5, flavortext:'This is not a refuge...',imgtag:'firestation.jpg'},
+  {name:'Fine Art Museum',district:'Downtown',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:4, flavortext:'Blood stains the walls, but you see nothing.',imgtag:'medbuilding.jpg'},
+  {name:'Warehouse',district:'Wharf',fastmin:0, fastmax:1, medmin:2, medmax:3, slowmin:2, slowmax:5, flavortext:'Some shipping containers still lying around.',imgtag:'medbuilding.jpg'},
+  {name:'Bank',district:'Wharf',fastmin:0, fastmax:1, medmin:0, medmax:2, slowmin:0, slowmax:3, flavortext:'Locked up tight, but theres an open window.', imgtag:'medbuilding.jpg'},
+  {name:'Yacht',district:'Wharf',fastmin:0, fastmax:1, medmin:1, medmax:2, slowmin:2, slowmax:3, flavortext:'Where is the owner?',imgtag:'yacht.jpg'}
 ]
 
 items = [
