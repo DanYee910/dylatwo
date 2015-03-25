@@ -51,9 +51,15 @@ $(document).ready(function() {
     clearEndofTurn();
     getEffects();
     gameState.turns += 1;
+    if(gameState.turns === winCons.maxturns){
+      endGame(gameState);
+    }
     newEvent();
     updateSidebar();
     showAvailRecipes();
+  })
+  $('#replay-game').on('click', function(){
+    window.location.reload();
   })
 
   //remove EoT effects
@@ -514,6 +520,45 @@ $(document).ready(function() {
     }
   }
 
+  function endGame(obj){
+    var food = obj.food
+    var mor = obj.morale
+    var shel = obj.shelter
+    $('div#stats-bar').hide();
+    $('div#explore-city').hide();
+    $('div#my-camp').hide();
+    $('div#end-screen').show();
+    $('#final-food').html(food)
+    $('#final-morale').html(mor)
+    $('#final-shelter').html(shel)
+    if(food >= winCons.foodwin1){
+      $('#food-win-lose').html('WIN! You have stockpiled plenty of food to last you through the winter.');
+    }
+    else if(food >= winCons.foodwin2){
+       $('#food-win-lose').html('BARELY SURVIVING.  You might have enough food to survive, a little emaciation never hurt anyone right?');
+    }else{
+       $('#food-win-lose').html('LOSE! Food? What food? Looks like everyone will starve to death...');
+    }
+
+    if(mor >= winCons.moralewin1){
+      $('#morale-win-lose').html('WIN! Spirits are high, you will make it through the cold months ahead.');
+    }
+    else if(mor >= winCons.moralewin2){
+      $('#morale-win-lose').html('BARELY SURVIVING.  Everyone is on edge, things will work out if no one snaps.');
+    }else{
+      $('#morale-win-lose').html('LOSE! Your party goes crazy and everyone turns on each other.');
+    }
+
+    if(shel >= winCons.shelterwin1){
+      $('#shelter-win-lose').html('WIN! You have a nice warm shelter to wait out the cold.');
+    }
+    else if(shel >= winCons.shelterwin2){
+      $('#shelter-win-lose').html('BARELY SURVIVING.  The cold air seeps in, not the most comfortable place to be but everyone will live.');
+    }else{
+      $('#shelter-win-lose').html('LOSE! If the zombies don\'t get everyone the elements will.');
+    }
+  }
+
   //print message to game log
   function printLog(string){
     if($('.game-log tr').length === maxMessages){
@@ -526,6 +571,7 @@ $(document).ready(function() {
   //******* BEGIN GAME *********
   //initialize game stats and stat views
   $('#all-items').hide();
+  $('div#end-screen').hide();
   initGameState();
   refreshPartyStats();
   updateSidebar();

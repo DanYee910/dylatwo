@@ -269,13 +269,26 @@ html
     text-align: center
     border: 1px solid black
 #end-screen
-  background-color: yellow
+  background-color: $verylight
+  border: 4px solid $meddark
+  color: $dark
   width: 80%
-  height: 100%
+  height: 500px
+  text-align: center
   margin: auto
-  tr td:first-child
-    width: 150px
-  tr td:nth-child(2)
-    width: 300px
-  tr td
-    border: 1px solid red
+  padding: 10px
+  table
+    border: 1px solid black
+    margin: auto
+    tr td:first-child
+      width: 100px
+    tr td:nth-child(2)
+      width: 100px
+    tr td
+      border: 1px solid $light
+  .win-lose-msg
+    color: #A30000
+  #replay-game
+    width: 200px
+    height: 60px
+    font-size: 20px

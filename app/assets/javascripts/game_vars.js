@@ -1,4 +1,13 @@
 var maxMessages = 50;
+var winCons = {
+  maxturns: 10,
+  foodwin1: 20,
+  foodwin2: 10,
+  moralewin1: 20,
+  moralewin2: 10,
+  shelterwin1: 20,
+  shelterwin2: 10
+}
 
 //locations decks
 var allSuburbs = [];
@@ -56,9 +65,9 @@ var gameState = {
   shelter: 4,
   tools: 1,
   mat: {
-    common: 2,//start2
-    uncommon: 1,//0
-    rare: 1//0
+    common: 2,
+    uncommon: 1,
+    rare: 1
   },
   recipes: [],
   created: [],
