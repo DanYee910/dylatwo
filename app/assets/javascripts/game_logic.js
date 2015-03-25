@@ -411,12 +411,16 @@ $(document).ready(function() {
   function craftSelected(idx){
     var rec = gameState.recipes[idx];
     var allreqs = parseMats(rec.materials);
-    if(spendMats(allreqs) === true){
-      gameState.created.push(rec);
-      $('.selected').parent().remove();
-      gameState.recipes.splice(idx, 1);
-      zeroSelectedRecipe();
-      printLog('Successfully crafted: '+rec.name);
+    if(rec.tools <= gameState.tools){
+      if(spendMats(allreqs) === true){
+        gameState.created.push(rec);
+        $('.selected').parent().remove();
+        gameState.recipes.splice(idx, 1);
+        zeroSelectedRecipe();
+        printLog('Successfully crafted: '+rec.name);
+      }
+    }else{
+      printLog('You need better tools to craft this.');
     }
   }
 
