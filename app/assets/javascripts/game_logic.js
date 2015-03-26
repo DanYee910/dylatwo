@@ -51,7 +51,7 @@ $(document).ready(function() {
     clearEndofTurn();
     getEffects();
     gameState.turns += 1;
-    if(gameState.turns === winCons.maxturns){
+    if(gameState.turns > winCons.maxturns){
       endGame(gameState);
     }
     newEvent();
