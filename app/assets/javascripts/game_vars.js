@@ -2,11 +2,11 @@ var maxMessages = 50;
 var winCons = {
   maxturns: 10,
   foodwin1: 20,
-  foodwin2: 10,
-  moralewin1: 20,
-  moralewin2: 10,
-  shelterwin1: 20,
-  shelterwin2: 10
+  foodwin2: 12,
+  moralewin1: 12,
+  moralewin2: 8,
+  shelterwin1: 12,
+  shelterwin2: 8
 }
 
 //locations decks
