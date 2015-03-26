@@ -268,7 +268,9 @@ $(document).ready(function() {
       setTimeout(function(){findItems(gameVars.district, num)}, 1000);
     }
     else{
-      printLog('Too many zombies, you run for your life emptyhanded.');
+      gameState.morale -= 1;
+      updateSidebar();
+      printLog('Too many zombies, lose 1 morale and flee for your life.');
     }
   }
 
