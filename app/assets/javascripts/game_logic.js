@@ -99,9 +99,9 @@ $(document).ready(function() {
 
   function updateSidebar(){
     $('#sidebar-turns').html(gameState.turns);
-    $('#sidebar-food').html(gameState.food);
-    $('#sidebar-morale').html(gameState.morale);
-    $('#sidebar-shelter').html(gameState.shelter);
+    $('#sidebar-food').html(gameState.food+' / '+winCons.foodwin1);
+    $('#sidebar-morale').html(gameState.morale+' / '+winCons.moralewin1);
+    $('#sidebar-shelter').html(gameState.shelter+' / '+winCons.shelterwin1);
     $('#sidebar-tools').html(gameState.tools);
     $('#sidebar-common').html(gameState.mat.common);
     $('#sidebar-uncommon').html(gameState.mat.uncommon);
