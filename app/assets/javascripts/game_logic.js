@@ -100,9 +100,9 @@ $(document).ready(function() {
 
   function updateSidebar(){
     $('#sidebar-turns').html(gameState.turns);
-    $('#sidebar-food').html(gameState.food+' / '+winCons.foodwin1);
-    $('#sidebar-morale').html(gameState.morale+' / '+winCons.moralewin1);
-    $('#sidebar-shelter').html(gameState.shelter+' / '+winCons.shelterwin1);
+    $('#sidebar-food').html(gameState.food+' / '+winCons.foodWin);
+    $('#sidebar-morale').html(gameState.morale+' / '+winCons.moraleWin);
+    $('#sidebar-shelter').html(gameState.shelter+' / '+winCons.shelterWin);
     $('#sidebar-tools').html(gameState.tools);
     $('#sidebar-common').html(gameState.mat.common);
     $('#sidebar-uncommon').html(gameState.mat.uncommon);
@@ -119,10 +119,7 @@ $(document).ready(function() {
   //show a new location
   function showNewLocation(district, alldistrict){
     //get a random location
-    var min = 0
-    var max = alldistrict.length - 1
-    var idx = getRandomInt(min, max)
-    var locObj = alldistrict[idx]
+    var locObj = alldistrict[getRandomInt(0, alldistrict.length - 1)]
 
     //store as current loc variable
     if(district === "suburbs"){
@@ -135,7 +132,7 @@ $(document).ready(function() {
       gameVars.wharf = locObj;
     }
 
-    //update correct view with this location
+    //update view with this location
     $('#'+district+' .location-img').attr('src', '/assets/'+locObj.imgtag);
     $('#'+district+' .loc-name').html(locObj.name);
     $('#'+district+' .qmin').html(locObj.fastmin);
@@ -160,10 +157,7 @@ $(document).ready(function() {
 
   //show a new Event
   function newEvent(){
-    var min = 0
-    var max = gameState.allEvents.length - 1
-    var idx = getRandomInt(min, max)
-    gameVars.evnt = gameState.allEvents[idx]
+    gameVars.evnt = gameState.allEvents[getRandomInt(0, gameState.allEvents.length - 1)]
 
     $('#current-event .event-name').html('Event: ' + gameVars.evnt.name);
     $('#current-event .event-txt').html(gameVars.evnt.flavortext);
@@ -261,6 +255,7 @@ $(document).ready(function() {
     }, 1000);
     setTimeout(function(){
       showNewLocation(district, nowDistrictDeck);
+      showReckless(moddedStats.reckless);
       $('.explore-button').prop('disabled', false);
     }, 2100);
   }
@@ -535,31 +530,31 @@ $(document).ready(function() {
     $('#final-food').html(food)
     $('#final-morale').html(mor)
     $('#final-shelter').html(shel)
-    if(food >= winCons.foodwin1){
-      $('#food-win-lose').html('WIN! You have stockpiled plenty of food to last you through the winter.');
+    if(food >= winCons.foodWin){
+      $('#food-win-lose').html(endGameMsgs.foodWin);
     }
-    else if(food >= winCons.foodwin2){
-       $('#food-win-lose').html('BARELY SURVIVING.  You might have enough food to survive, a little emaciation never hurt anyone right?');
+    else if(food >= winCons.foodMeh){
+       $('#food-win-lose').html(endGameMsgs.foodMeh);
     }else{
-       $('#food-win-lose').html('LOSE! Food? What food? Looks like everyone will starve to death...');
+       $('#food-win-lose').html(endGameMsgs.foodLose);
     }
 
-    if(mor >= winCons.moralewin1){
-      $('#morale-win-lose').html('WIN! Spirits are high, you will make it through the cold months ahead.');
+    if(mor >= winCons.moraleWin){
+      $('#morale-win-lose').html(endGameMsgs.moraleWin);
     }
-    else if(mor >= winCons.moralewin2){
-      $('#morale-win-lose').html('BARELY SURVIVING.  Everyone is on edge, things will work out if no one snaps.');
+    else if(mor >= winCons.moraleMeh){
+      $('#morale-win-lose').html(endGameMsgs.moraleMeh);
     }else{
-      $('#morale-win-lose').html('LOSE! Your party goes crazy and everyone turns on each other.');
+      $('#morale-win-lose').html(endGameMsgs.moraleLose);
     }
 
-    if(shel >= winCons.shelterwin1){
-      $('#shelter-win-lose').html('WIN! You have a nice warm shelter to wait out the cold.');
+    if(shel >= winCons.shelterWin){
+      $('#shelter-win-lose').html(endGameMsgs.shelterWin);
     }
-    else if(shel >= winCons.shelterwin2){
-      $('#shelter-win-lose').html('BARELY SURVIVING.  The cold air seeps in, not the most comfortable place to be but everyone will live.');
+    else if(shel >= winCons.shelterMeh){
+      $('#shelter-win-lose').html(endGameMsgs.shelterMeh);
     }else{
-      $('#shelter-win-lose').html('LOSE! If the zombies don\'t get everyone the elements will.');
+      $('#shelter-win-lose').html(endGameMsgs.shelterLose);
     }
   }
 
@@ -572,8 +567,7 @@ $(document).ready(function() {
     $('.game-log').scrollTop($('.game-log')[0].scrollHeight);
   }
 
-  //******* BEGIN GAME *********
-  //initialize game stats and stat views
+  //******* BEGIN GAME - setup game*********
   $('#all-items').hide();
   $('div#end-screen').hide();
   initGameState();

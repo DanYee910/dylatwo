@@ -1,12 +1,23 @@
 var maxMessages = 50;
 var winCons = {
   maxturns: 10,
-  foodwin1: 25,
-  foodwin2: 15,
-  moralewin1: 10,
-  moralewin2: 7,
-  shelterwin1: 10,
-  shelterwin2: 7
+  foodWin: 25,
+  foodMeh: 15,
+  moraleWin: 10,
+  moraleMeh: 7,
+  shelterWin: 10,
+  shelterMeh: 7
+}
+var endGameMsgs = {
+  foodWin: 'WIN! You have stockpiled plenty of food to last you through the winter.',
+  foodMeh: 'BARELY SURVIVING.  You might have enough food to survive, a little emaciation never hurt anyone right?',
+  foodLose: 'LOSE! Food? What food? Looks like everyone will starve to death...',
+  moraleWin: 'WIN! Spirits are high, you will make it through the cold months ahead.',
+  moraleMeh: 'BARELY SURVIVING.  Everyone is on edge, things will work out if no one snaps.',
+  moraleLose: 'LOSE! Your party goes crazy and everyone turns on each other.',
+  shelterWin: 'WIN! You have a nice warm shelter to wait out the cold.',
+  shelterMeh: 'BARELY SURVIVING.  The cold air seeps in, not the most comfortable place to be but everyone will live.',
+  shelterLose: 'LOSE! If the zombies don\'t get everyone the elements will.'
 }
 
 //locations decks
