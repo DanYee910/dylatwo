@@ -267,9 +267,8 @@ $(document).ready(function() {
 
   //combat
   function fightZombies(min, max, num){
-    //add random zombie roll plus mods
+    //get zombies
     var z = getRandomInt(min, max);
-    z += untilEndofTurn.modZombieStrength;
 
     printLog('You fight '+z+' zombie(s) with your attack of '+moddedStats.attack);
     if(moddedStats.attack >= z){

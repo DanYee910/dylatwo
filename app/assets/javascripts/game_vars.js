@@ -49,7 +49,6 @@ var untilEndofTurn = {
   modActions: 0,
   modReckless: 0,
   modThorough: 0,
-  modZombieStrength: 0
 }
 
 var moddedStats = {
