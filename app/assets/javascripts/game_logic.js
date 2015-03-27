@@ -65,11 +65,11 @@ $(document).ready(function() {
 
   //remove EoT effects
   function clearEndofTurn(){
-    untilEndofTurn.modAttack = 0;
-    untilEndofTurn.modActions = 0;
-    untilEndofTurn.modReckless = 0;
-    untilEndofTurn.modThorough = 0;
-    untilEndofTurn.modZombieStrength = 0;
+    for(var key in untilEndofTurn){
+      if(key != 'actionsLeft'){
+        untilEndofTurn[key] = 0
+      }
+    }
     untilEndofTurn.actionsLeft = moddedStats.actions;
   }
 
@@ -215,7 +215,7 @@ $(document).ready(function() {
     useAction(1);
     gameVars.exploreDiff = diff;
     gameVars.district = district;
-    var tempDistrictDeck = "";
+    var nowDistrictDeck = "";
 
     //disable buttons
     $('.explore-button').prop('disabled', true);
@@ -223,35 +223,35 @@ $(document).ready(function() {
     //find location
     if(gameVars.district === "suburbs"){
       gameVars.location = gameVars.suburbs;
-      tempDistrictDeck = allSuburbs;
+      nowDistrictDeck = allSuburbs;
     }
     else if(gameVars.district === "downtown"){
       gameVars.location = gameVars.downtown;
-      tempDistrictDeck = allDowntown;
+      nowDistrictDeck = allDowntown;
     }
     else {
       gameVars.location = gameVars.wharf;
-      tempDistrictDeck = allWharf;
+      nowDistrictDeck = allWharf;
     }
     printLog('Searching '+gameVars.location.name+'...');
 
     //find fight values here
     var zmin;
     var zmax;
-    var numRewards;//up to 2 for quick, 4 for cautious, 6 full
+    var numRewards;
     if(gameVars.exploreDiff === 'quick'){
       zmin = gameVars.location.fastmin;
       zmax = gameVars.location.fastmax;
-      numRewards = getRandomInt(0,2);
+      numRewards = getRandomInt(0,gameVars.maxQuickLoot);
     }
     else if(gameVars.exploreDiff === 'cautious'){
       zmin = gameVars.location.medmin;
       zmax = gameVars.location.medmax;
-      numRewards = getRandomInt(0,4);
+      numRewards = getRandomInt(0,gameVars.maxCautiousLoot);
     } else {
       zmin = gameVars.location.slowmin;
       zmax = gameVars.location.slowmax;
-      numRewards = getRandomInt(0,6);
+      numRewards = getRandomInt(0,gameVars.maxFullLoot);
     }
 
     zmax += moddedStats.reckless
@@ -261,7 +261,7 @@ $(document).ready(function() {
       fightZombies(zmin, zmax, numRewards)
     }, 1000);
     setTimeout(function(){
-      showNewLocation(district, tempDistrictDeck);
+      showNewLocation(district, nowDistrictDeck);
       $('.explore-button').prop('disabled', false);
     }, 2100);
   }
@@ -271,16 +271,15 @@ $(document).ready(function() {
     //add random zombie roll plus mods
     var z = getRandomInt(min, max);
     z += untilEndofTurn.modZombieStrength;
-    //combat
+
     printLog('You fight '+z+' zombie(s) with your attack of '+moddedStats.attack);
     if(moddedStats.attack >= z){
       //success, add items to backpack
       printLog('Zombies defeated, found '+num+' items!');
       setTimeout(function(){findItems(gameVars.district, num)}, 1000);
-    }
-    else{
-      var coinflip = getRandomInt(0,1);
-      if(coinflip === 0){
+    }else{
+      var fate = getRandomInt(0,1);
+      if(fate === 0){
         gameState.morale -= 1;
         updateSidebar();
         printLog('Too many zombies, lose 1 morale and flee for your life.');
@@ -372,15 +371,13 @@ $(document).ready(function() {
 
     if(district === "suburbs"){
       showNewLocation("suburbs", allSuburbs);
-      printLog('Found a new place in the suburbs.');
     }
     else if(district === "downtown"){
       showNewLocation("downtown", allDowntown);
-      printLog('Found a new place downtown');
     } else {
       showNewLocation("wharf", allWharf);
-      printLog('Found a new place at the wharf');
     }
+    printLog('Found a new '+district+' location.');
     showReckless(moddedStats.reckless);
   }
 

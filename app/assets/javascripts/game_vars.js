@@ -21,8 +21,10 @@ var wharfItems = [];
 var universalItems = [];
 var gameRecipes = [];
 
-//game variables
 var gameVars = {
+  maxQuickLoot: 2,
+  maxCautiousLoot: 4,
+  maxFullLoot: 6,
   downtown: '',
   suburbs: '',
   wharf: '',
@@ -38,8 +40,8 @@ var permStats = {
   recipesbackpack: [],
   attack: 0,
   actions: 0,
-  reckless: 0, //+max range zombies encountered
-  thorough: 0 //more items found
+  reckless: 0,
+  thorough: 0
 }
 //modifications that last this turn only
 var untilEndofTurn = {
@@ -89,4 +91,4 @@ var bonusesAtEoT = {
       common: 0,
       uncommon: 0,
       rare: 0
-    }
+}
