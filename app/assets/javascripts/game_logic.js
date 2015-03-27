@@ -288,54 +288,40 @@ $(document).ready(function() {
   }
 
   function findItems(district, num){
-    //set up district decks
-    var here;
-    var there1;
-    var there2;
-    if(district === "suburbs"){
-      here = suburbItems;
-      there1 = downtownItems;
-      there2 = wharfItems;
-    }
-    else if(district === "downtown"){
-      here = downtownItems;
-      there1 = suburbItems;
-      there2 = wharfItems;
-    } else {
-      here = wharfItems;
-      there1 = suburbItems;
-      there2 = downtownItems;
-    }
-    //chances = 2 for own district, 2 for universal, 1 each for other district or recipe
+    var hat = ['suburbs', 'downtown','wharf','all','all','recipe'];
+    hat.push(district);
+    var hatMaxIdx = hat.length - 1;
+    //final odds
+      // current district items:2
+      // universal(all) items:2
+      // 1st other district items:1
+      // 2nd other district items:1
+      // recipes:1
     for(var items = 0; items < num; items++){
-      //get random item category
-      var cat = getRandomInt(0,6);
-      //get recipes
-      if(cat === 0){
+      var pick = hat[getRandomInt(0,hatMaxIdx)];
+
+      if(pick === 'recipe'){
         var r = gameRecipes[getRandomInt(0,gameRecipes.length - 1)];
         printLog('you found recipe: '+r.name);
         permStats.recipesbackpack.push(r);
       }
-      //get universal items
-      else if(cat === 1 || cat === 2){
+      else if(pick === 'all'){
         var i = universalItems[getRandomInt(0,universalItems.length - 1)];
         printLog('you found: '+i.name);
         permStats.itemsbackpack.push(i);
       }
-      //get district items
-      else if(cat === 3 || cat === 4){
-        var i = here[getRandomInt(0,here.length - 1)];
+      else if(pick === 'suburbs'){
+        var i = suburbItems[getRandomInt(0,suburbItems.length - 1)];
         printLog('you found: '+i.name);
         permStats.itemsbackpack.push(i);
       }
-      //get other 2 district items
-      else if(cat === 5) {
-        var i = there1[getRandomInt(0,there1.length - 1)];
+      else if(pick === 'downtown'){
+        var i = downtownItems[getRandomInt(0,downtownItems.length - 1)];
         printLog('you found: '+i.name);
         permStats.itemsbackpack.push(i);
       }
-      else if(cat === 6){
-        var i = there2[getRandomInt(0,there2.length - 1)];
+      else if(pick === 'wharf'){
+        var i = wharfItems[getRandomInt(0,wharfItems.length - 1)];
         printLog('you found: '+i.name);
         permStats.itemsbackpack.push(i);
       }
