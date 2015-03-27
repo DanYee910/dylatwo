@@ -55,6 +55,7 @@ $(document).ready(function() {
       endGame(gameState);
     }
     newEvent();
+    showReckless(moddedStats.reckless);
     updateSidebar();
     showAvailRecipes();
   })
@@ -138,13 +139,23 @@ $(document).ready(function() {
     $('#'+district+' .location-img').attr('src', '/assets/'+locObj.imgtag);
     $('#'+district+' .loc-name').html(locObj.name);
     $('#'+district+' .qmin').html(locObj.fastmin);
-    $('#'+district+' .qmax').html(locObj.fastmax);
     $('#'+district+' .cmin').html(locObj.medmin);
-    $('#'+district+' .cmax').html(locObj.medmax);
     $('#'+district+' .fmin').html(locObj.slowmin);
+    $('#'+district+' .qmax').html(locObj.fastmax);
+    $('#'+district+' .cmax').html(locObj.medmax);
     $('#'+district+' .fmax').html(locObj.slowmax);
     $('#'+district+' .flavtxt').html(locObj.flavortext);
     printLog(locObj.name+' discovered!');
+  }
+
+  function showReckless(num){
+    var districts = ['suburbs','downtown','wharf']
+    for(var n = 0; n < districts.length; n++){
+      var dist = districts[n]
+      $('#'+dist+' .qmax').html((gameVars[dist].fastmax+num).toString());
+      $('#'+dist+' .cmax').html((gameVars[dist].medmax+num).toString());
+      $('#'+dist+' .fmax').html((gameVars[dist].slowmax+num).toString());
+    }
   }
 
   //show a new Event
@@ -587,5 +598,6 @@ $(document).ready(function() {
   showNewLocation("downtown", allDowntown);
   showNewLocation("wharf", allWharf);
   newEvent();
+  showReckless(moddedStats.reckless);
   showAvailRecipes();
 })
