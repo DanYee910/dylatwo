@@ -213,44 +213,43 @@ $(document).ready(function() {
   //explore
   function exploreHere(diff, district){
     useAction(1);
-    gameVars.exploreDiff = diff;
     gameVars.district = district;
     var nowDistrictDeck = "";
+    //fight values here
+    var zmin;
+    var zmax;
+    var numRewards;
 
     //disable buttons
     $('.explore-button').prop('disabled', true);
 
     //find location
-    if(gameVars.district === "suburbs"){
-      gameVars.location = gameVars.suburbs;
+    if(district === "suburbs"){
+      gameVars.here = gameVars.suburbs;
       nowDistrictDeck = allSuburbs;
     }
-    else if(gameVars.district === "downtown"){
-      gameVars.location = gameVars.downtown;
+    else if(district === "downtown"){
+      gameVars.here = gameVars.downtown;
       nowDistrictDeck = allDowntown;
     }
     else {
-      gameVars.location = gameVars.wharf;
+      gameVars.here = gameVars.wharf;
       nowDistrictDeck = allWharf;
     }
-    printLog('Searching '+gameVars.location.name+'...');
+    printLog('Searching '+gameVars.here.name+'...');
 
-    //find fight values here
-    var zmin;
-    var zmax;
-    var numRewards;
-    if(gameVars.exploreDiff === 'quick'){
-      zmin = gameVars.location.fastmin;
-      zmax = gameVars.location.fastmax;
+    if(diff === 'quick'){
+      zmin = gameVars.here.fastmin;
+      zmax = gameVars.here.fastmax;
       numRewards = getRandomInt(0,gameVars.maxQuickLoot);
     }
-    else if(gameVars.exploreDiff === 'cautious'){
-      zmin = gameVars.location.medmin;
-      zmax = gameVars.location.medmax;
+    else if(diff === 'cautious'){
+      zmin = gameVars.here.medmin;
+      zmax = gameVars.here.medmax;
       numRewards = getRandomInt(0,gameVars.maxCautiousLoot);
     } else {
-      zmin = gameVars.location.slowmin;
-      zmax = gameVars.location.slowmax;
+      zmin = gameVars.here.slowmin;
+      zmax = gameVars.here.slowmax;
       numRewards = getRandomInt(0,gameVars.maxFullLoot);
     }
 

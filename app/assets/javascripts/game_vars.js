@@ -28,9 +28,8 @@ var gameVars = {
   downtown: '',
   suburbs: '',
   wharf: '',
-  exploreDiff: '',
   district: '',
-  location: '',
+  here: '',
   evnt: ''
 }
 
