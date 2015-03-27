@@ -279,9 +279,14 @@ $(document).ready(function() {
       setTimeout(function(){findItems(gameVars.district, num)}, 1000);
     }
     else{
-      gameState.morale -= 1;
-      updateSidebar();
-      printLog('Too many zombies, lose 1 morale and flee for your life.');
+      var coinflip = getRandomInt(0,1);
+      if(coinflip === 0){
+        gameState.morale -= 1;
+        updateSidebar();
+        printLog('Too many zombies, lose 1 morale and flee for your life.');
+      }else{
+        printLog('Too many zombies, you flee emptyhanded.');
+      }
     }
   }
 
