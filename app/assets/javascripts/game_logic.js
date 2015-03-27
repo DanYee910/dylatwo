@@ -381,6 +381,7 @@ $(document).ready(function() {
       showNewLocation("wharf", allWharf);
       printLog('Found a new place at the wharf');
     }
+    showReckless(moddedStats.reckless);
   }
 
   //func to sort by name alpabetically
